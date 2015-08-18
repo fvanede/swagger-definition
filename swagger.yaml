@@ -1,0 +1,423 @@
+# Holland Casino REST JSON API for Favorites App
+#
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "0.1.0"
+  title: HC Favorites App web service
+
+# Describe your paths here
+paths:
+  /users:
+    post:
+      tags:
+        - users
+      summary: Register a new user and/or login an existing user
+      description: ""
+      operationId: registerUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: credentials
+          description: User object that needs to be added to the backend CRM system
+          required: true
+          schema:
+            $ref: "#/definitions/credentials"
+      responses:
+        "200":
+          description: Successful operation - user is known and returned (no need to create again)
+          schema:
+            $ref: "#/definitions/user_reference"
+        "201":
+          description: User created
+          schema:
+            $ref: "#/definitions/user_reference"
+        "404":
+          description: Not found
+          schema:
+            $ref: "#/definitions/messages"          
+        "405":
+          description: Invalid input  
+          schema:
+            $ref: "#/definitions/messages"
+  # This is a path endpoint. Change it.
+  /users/{app_id}:
+    # This is a HTTP operation
+    get:
+      tags:
+        - users
+      summary: Retrieve app specified app user's account data
+      description: Returns loyalty data and other account information 
+      operationId: getUserByAppId
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: app_id
+          description: App ID of user that needs to be fetched
+          required: true
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Successful operation
+          schema:
+            $ref: "#/definitions/user"
+        "400":
+          description: Bad request content
+        "404":
+          description: User not found
+    patch:
+      tags:
+        - users
+      summary: Update of a user object
+      description: The user can update only particular fields.
+      operationId: patchUserByAppId
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: app_id
+          description: App ID of user that needs to be patched
+          required: true
+          type: integer
+          format: int32
+        - in: body
+          name: credentials
+          description: User object that needs to be updated with the specified fields
+          required: true
+          schema:
+            $ref: "#/definitions/email"
+      responses:
+        "200":
+          description: Successful operation
+          schema:
+            $ref: "#/definitions/user_reference"
+        "400":
+          description: Bad request content
+          schema:
+            $ref: "#/definitions/messages"
+        "404":
+          description: User not found
+  /preferences/{app_id}:
+    # This is a HTTP operation
+    get:
+      tags:
+        - preferences
+      summary: Retrieve account preferences of the the user with {app_id}
+      description: Returns the account preferences of the supplied user
+      operationId: getUserPreferencesByAppId
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: app_id
+          description: App ID of user that needs to be fetched
+          required: true
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Successful operation
+          schema:
+            $ref: "#/definitions/preferences"
+        "400":
+          description: Bad request content
+        "404":
+          description: User not found
+  /jackpots:
+    # This is a HTTP operation
+    get:
+      tags:
+        - jackpots
+      summary: Retrieve JackPot values from HC backend systems
+      description: Returns the Jackpot values of all Dutch casino's 
+      operationId: getJackPots
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Successful operation
+          schema:
+            $ref: "#/definitions/jackpots"
+        "400":
+          description: Bad request content
+  /jackpots/{site_code}:
+    # This is a HTTP operation
+    get:
+      tags:
+        - jackpots
+      summary: Retrieve JackPot value from a specific location
+      description: Returns the JackPot value from the casino with site code "site_code"  
+      operationId: getJackpotBySiteCode
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: site_code
+          description: Site code of the casino 
+          required: true
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Successful operation
+          schema:
+            $ref: "#/definitions/jackpot"
+        "400":
+          description: Bad request content
+        "404":
+          description: Site code not found
+  /campaigns/{app_id}:
+    # This is a HTTP operation
+    get:
+      tags:
+        - campaigns
+      summary: Retrieve campaigns that apply to user with app_id value
+      description: Retrieve marketing campaigns that apply to user
+      operationId: getCampaignsByAppId
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: app_id
+          description: App ID of the user
+          required: true
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Successful operation
+          schema:
+            $ref: "#/definitions/campaigns"
+        "400":
+          description: Bad request content
+        "404":
+          description: User not found
+definitions:
+  credentials:
+    required:
+      - birth_date
+      - email
+    properties:
+      app_id:
+        type: string
+        description: Unique ID representing a specific Favorites App user
+      pers_id:
+        type: string
+        description: When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.
+      initials:
+        type: string
+        description: Initials of the user
+      surname_prefix:
+        type: string
+        description: Holds the user's preposition if applicable (e.g. van, van der, von, de, 't, van 't)
+      surname:
+        type: string
+        description: The user's family name or last name
+      birth_date:
+        type: string
+        format: date
+        description: The user's date of birth
+      gender:
+        type: string
+        enum: 
+          - Male
+          - Female
+        description: The user's gender 
+      email:
+          $ref: "#/definitions/email"
+  user:
+    required:
+      - app_id
+    properties:
+      app_id:
+        type: string
+        description: Unique ID representing a specific Favorites App user
+      card:
+          $ref: "#/definitions/card"
+      loyalty:
+          $ref: "#/definitions/loyalty"
+  card:
+    required:
+      - card_id
+      - pers_id
+      - expiry_date
+    properties:
+      card_id:
+        type: string
+        description: The Favorites Card ID
+      pers_id:
+        type: string
+      expiry_date:
+        type: string
+        format: date
+        description: The expiry date of the Favorites Card 
+      type:
+        type: string
+        description: Description of the type of card
+  campaign:
+    required:
+      - name
+    properties:
+      name: 
+        type: string
+      start_date: 
+        type: string
+        format: date 
+      end_date:
+        type: string
+        format: date
+  messages:
+    properties:
+      message: 
+        type: array
+        items:
+          type: string 
+  user_reference:
+    required:
+      - app_id
+      - is_promotable
+    properties:
+      app_id:
+        type: string
+      is_promotable:
+        type: boolean
+  loyalty:
+    required:
+      - account_nr
+      - points
+      - current_segment 
+    properties:
+      account_nr:
+        type: integer
+        format: int64
+      points:
+        type: integer
+        format: int64
+      current_segment:
+        properties:
+          code:
+            type: integer
+            format: int32
+            description: The code of the user's current loyalty segment
+          value:
+            type: string
+            description: Description of the users's current loyalty segment (e.g. Black Favorites Card)
+      next_segment:
+        properties:
+          code:
+            type: integer
+            format: int32
+            description: The code of the next loyalty segment the user can reach
+          value:
+            type: string
+            description: Description of loyalty segment the user can reach
+          remaining_visits:
+            type: integer
+            format: int32
+            description: The number of visits the user needs to reach the next loyalty segment
+          remaining_visits_expiry_date:
+            type: string
+            format: date
+            description: Remaining visits need to be done before expiry date
+  email:
+    required:
+      - email_address
+      - email_opt_in
+    properties:
+      email_address:
+        type: string
+        description: The user's preferred E-mail address
+      email_opt_in:
+        type: boolean
+        description: The user can accept e-mails from HC (true) or decline mails (false)
+  preferences:
+    required:
+      - app_id
+    properties:
+      app_id:
+        type: string
+        description: Unique ID representing a specific Favorites App user
+      preference:
+        type: array
+        items:
+          $ref: "#/definitions/preference"
+        description: A list of of objects of type preference that holds a user preference
+  preference:
+    required:
+      - key
+      - value
+    properties:
+      key: 
+        type: string
+        description: Property key
+      value:
+        type: string
+        description: Property value
+    description: A key/value pair describing a user preference
+  jackpots:
+    type: array
+    items:
+      $ref: "#/definitions/jackpot"
+    description: List of Jackpot objects, each holding a location and Jackpot value
+  jackpot:
+    required:
+      - location
+      - value
+    properties:
+      location:
+        type: string
+      value:
+        type: integer
+        format: int64
+  campaigns:
+    properties:
+      app_id:
+        type: string
+        description: Unique ID representing a specific Favorites App user
+      campaign:
+        type: array
+        items:
+          $ref: "#/definitions/campaign"
+  campaign:
+    required:
+      - code
+      - name
+      - end_date
+    properties:
+      code:
+        type: string
+        description: Internal code of the marketing campaign
+      name:
+        type: string
+        description: Description of the marketing campaign
+      campaign_image_type:
+        type: string
+        description: ???
+      start_date:
+        type: string
+        format: date
+      end_date:
+        type: string
+        format: date
+      description:
+        type: string
+        description: Textual description of the marketing campaign
+      
+        
+
+
+          
+  
+
+
+        
+    
+      
+
+

@@ -13,8 +13,8 @@ paths:
     post:
       tags:
         - users
-      summary: Register a new user and/or login an existing user
-      description: ""
+      summary: Register / Login
+      description: Register a new user and/or login an existing user
       operationId: registerUser
       consumes:
         - application/json
@@ -50,8 +50,8 @@ paths:
     get:
       tags:
         - users
-      summary: Retrieve app specified app user's account data
-      description: Returns loyalty data and other account information 
+      summary: Get user's account data
+      description: Returns loyalty data and other account information of the user with ID {app_id}
       operationId: getUserByAppId
       produces:
         - application/json
@@ -61,7 +61,7 @@ paths:
           description: App ID of user that needs to be fetched
           required: true
           type: integer
-          format: int32
+          format: int64
       responses:
         "200":
           description: Successful operation
@@ -71,45 +71,30 @@ paths:
           description: Bad request content
         "404":
           description: User not found
-    patch:
+  /preferences:
+    # This is a HTTP operation
+    get:
       tags:
-        - users
-      summary: Update of a user object
-      description: The user can update only particular fields.
-      operationId: patchUserByAppId
+        - preferences
+      summary: Get all preference key/value pairs
+      description: Get all possible preference key/value pairs, sorted by category and sub category
+      operationId: getAllPreferences
       produces:
         - application/json
-      parameters:
-        - in: path
-          name: app_id
-          description: App ID of user that needs to be patched
-          required: true
-          type: integer
-          format: int32
-        - in: body
-          name: credentials
-          description: User object that needs to be updated with the specified fields
-          required: true
-          schema:
-            $ref: "#/definitions/email"
       responses:
         "200":
           description: Successful operation
           schema:
-            $ref: "#/definitions/user_reference"
+            $ref: "#/definitions/categories"
         "400":
-          description: Bad request content
-          schema:
-            $ref: "#/definitions/messages"
-        "404":
-          description: User not found
+          description: Bad request
   /preferences/{app_id}:
     # This is a HTTP operation
     get:
       tags:
         - preferences
-      summary: Retrieve account preferences of the the user with {app_id}
-      description: Returns the account preferences of the supplied user
+      summary: Get user preferences
+      description: Retrieves account preferences of the the user with {app_id}
       operationId: getUserPreferencesByAppId
       produces:
         - application/json
@@ -119,12 +104,12 @@ paths:
           description: App ID of user that needs to be fetched
           required: true
           type: integer
-          format: int32
+          format: int64
       responses:
         "200":
           description: Successful operation
           schema:
-            $ref: "#/definitions/preferences"
+            $ref: "#/definitions/user_preferences"
         "400":
           description: Bad request content
         "404":
@@ -134,8 +119,8 @@ paths:
     get:
       tags:
         - jackpots
-      summary: Retrieve JackPot values from HC backend systems
-      description: Returns the Jackpot values of all Dutch casino's 
+      summary: Retrieve all JackPot values
+      description: Returns the Jackpot values of all HC locations
       operationId: getJackPots
       produces:
         - application/json
@@ -151,8 +136,8 @@ paths:
     get:
       tags:
         - jackpots
-      summary: Retrieve JackPot value from a specific location
-      description: Returns the JackPot value from the casino with site code "site_code"  
+      summary: Retrieve location JackPot values
+      description: Returns the JackPot value from the casino with site code {site_code}. Site code is a code to identify an HC location.  
       operationId: getJackpotBySiteCode
       produces:
         - application/json
@@ -162,12 +147,12 @@ paths:
           description: Site code of the casino 
           required: true
           type: integer
-          format: int32
+          format: int64
       responses:
         "200":
           description: Successful operation
           schema:
-            $ref: "#/definitions/jackpot"
+            $ref: "#/definitions/jackpots"
         "400":
           description: Bad request content
         "404":
@@ -177,8 +162,8 @@ paths:
     get:
       tags:
         - campaigns
-      summary: Retrieve campaigns that apply to user with app_id value
-      description: Retrieve marketing campaigns that apply to user
+      summary: Get campaigns for user
+      description: Retrieve marketing campaigns that apply to user with ID {app_id}
       operationId: getCampaignsByAppId
       produces:
         - application/json
@@ -188,7 +173,7 @@ paths:
           description: App ID of the user
           required: true
           type: integer
-          format: int32
+          format: int64
       responses:
         "200":
           description: Successful operation
@@ -200,9 +185,6 @@ paths:
           description: User not found
 definitions:
   credentials:
-    required:
-      - birth_date
-      - email
     properties:
       app_id:
         type: string
@@ -210,6 +192,14 @@ definitions:
       pers_id:
         type: string
         description: When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.
+      guest:
+        $ref: "#/definitions/guest"
+  guest:
+    required:
+      - birth_date
+      - email_address
+      - email_opt_in
+    properties:
       initials:
         type: string
         description: Initials of the user
@@ -229,55 +219,25 @@ definitions:
           - Male
           - Female
         description: The user's gender 
-      email:
-          $ref: "#/definitions/email"
+      email_address:
+        type: string
+        description: The user's preferred E-mail address
+      email_opt_in:
+        type: boolean
+        description: The user can accept e-mails from HC (true) or decline mails (false)
   user:
-    required:
-      - app_id
     properties:
-      app_id:
-        type: string
-        description: Unique ID representing a specific Favorites App user
-      card:
-          $ref: "#/definitions/card"
-      loyalty:
-          $ref: "#/definitions/loyalty"
-  card:
-    required:
-      - card_id
-      - pers_id
-      - expiry_date
-    properties:
-      card_id:
-        type: string
-        description: The Favorites Card ID
+      user_reference:
+        $ref: "#/definitions/user_reference"
       pers_id:
         type: string
-      expiry_date:
-        type: string
-        format: date
-        description: The expiry date of the Favorites Card 
-      type:
-        type: string
-        description: Description of the type of card
-  campaign:
-    required:
-      - name
-    properties:
-      name: 
-        type: string
-      start_date: 
-        type: string
-        format: date 
-      end_date:
-        type: string
-        format: date
-  messages:
-    properties:
-      message: 
-        type: array
-        items:
-          type: string 
+        description: When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.        
+      guest:
+        $ref: "#/definitions/guest"
+      card:
+        $ref: "#/definitions/card"
+      loyalty:
+          $ref: "#/definitions/loyalty"
   user_reference:
     required:
       - app_id
@@ -285,8 +245,34 @@ definitions:
     properties:
       app_id:
         type: string
+        description: Unique ID representing a specific Favorites App user
       is_promotable:
         type: boolean
+        description: Indicates if the user may visit a HC location or is on the blacklist (banned temporarily or permanent)
+  card:
+    required:
+      - card_nr
+      - expiry_date
+    properties:
+      card_nr:
+        type: string
+        description: The ID of the Favorites Card
+      loyalty_account_nr:
+        type: string 
+        description: Loyalty account number of the card user
+      expiry_date:
+        type: string
+        format: date
+        description: The expiry date of the Favorites Card 
+      type:
+        type: string
+        description: Description of the type of card
+  messages:
+    properties:
+      message: 
+        type: array
+        items:
+          type: string 
   loyalty:
     required:
       - account_nr
@@ -325,29 +311,36 @@ definitions:
             type: string
             format: date
             description: Remaining visits need to be done before expiry date
-  email:
-    required:
-      - email_address
-      - email_opt_in
+  user_preferences:
     properties:
-      email_address:
-        type: string
-        description: The user's preferred E-mail address
-      email_opt_in:
-        type: boolean
-        description: The user can accept e-mails from HC (true) or decline mails (false)
-  preferences:
-    required:
-      - app_id
+      user_reference:
+        $ref: "#/definitions/user_reference"
+      categories:
+        $ref: "#/definitions/categories"
+  categories:
+    type: array
+    items:
+      $ref: "#/definitions/category"
+      description: A list of of objects of a preference category. Examples of Categories are for instance Game, Entertainment and Locations.
+  category:
     properties:
-      app_id:
+      name:
         type: string
-        description: Unique ID representing a specific Favorites App user
-      preference:
+        description: The name of the category
+      sub_categories:
         type: array
         items:
-          $ref: "#/definitions/preference"
-        description: A list of of objects of type preference that holds a user preference
+          $ref: "#/definitions/sub_category"
+        description: A list of of objects of a preference sub category. Examples of sub_categories for the category "Game" are for instance "Tablegame" and "Slotmachine"]. If a category does not have sub categories, the name of the sub category is the same as the name of the category.
+  sub_category:
+    properties:
+      name:
+        type: string
+        description: The name of the sub category
+      preferences:
+        type: array
+        items:
+          $ref: "#/definitions/preference"  
   preference:
     required:
       - key
@@ -377,10 +370,9 @@ definitions:
         format: int64
   campaigns:
     properties:
-      app_id:
-        type: string
-        description: Unique ID representing a specific Favorites App user
-      campaign:
+      user_reference:
+        $ref: "#/definitions/user_reference"
+      campaigns:
         type: array
         items:
           $ref: "#/definitions/campaign"
@@ -396,28 +388,17 @@ definitions:
       name:
         type: string
         description: Description of the marketing campaign
-      campaign_image_type:
-        type: string
-        description: ???
-      start_date:
-        type: string
-        format: date
-      end_date:
-        type: string
-        format: date
       description:
         type: string
         description: Textual description of the marketing campaign
-      
-        
-
-
-          
-  
-
-
-        
-    
-      
-
-
+      image_type:
+        type: string
+        description: Reference to a picture that could be shown to the user
+      start_date:
+        type: string
+        format: date
+        description: Start date of the campaign
+      end_date:
+        type: string
+        format: date
+        description: End date of the campaign

@@ -4,9 +4,8 @@ swagger: '2.0'
 
 # This is your document metadata
 info:
-  version: "0.1.0"
-  title: HC Favorites App web service
-
+  version: "0.2.0"
+  title: HC Favorites App web service.
 # Describe your paths here
 paths:
   /users:
@@ -15,7 +14,7 @@ paths:
         - users
       summary: Register / Login
       description: Register a new user and/or login an existing user
-      operationId: registerUser
+      operationId: RequestRegisterFavAppUser
       consumes:
         - application/json
       produces:
@@ -38,21 +37,17 @@ paths:
             $ref: "#/definitions/user_reference"
         "404":
           description: Not found
-          schema:
-            $ref: "#/definitions/messages"          
         "405":
-          description: Invalid input  
-          schema:
-            $ref: "#/definitions/messages"
+          description: Invalid input
   # This is a path endpoint. Change it.
   /users/{app_id}:
     # This is a HTTP operation
     get:
       tags:
         - users
-      summary: Get user's account data
+      summary: Get user's account and loyalty data
       description: Returns loyalty data and other account information of the user with ID {app_id}
-      operationId: getUserByAppId
+      operationId: RequestFavGuestData
       produces:
         - application/json
       parameters:
@@ -71,14 +66,41 @@ paths:
           description: Bad request content
         "404":
           description: User not found
+  /users/{app_id}/all_data:
+    # This is a HTTP operation
+    get:
+      tags:
+        - users
+      summary: Get all the user's data
+      description: Get all the user's data including preferences, loyalty points, user data etc.
+      operationId: RequestGetFavAppAllData
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: app_id
+          description: App ID of user that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Successful operation
+          schema:
+            $ref: "#/definitions/all_user_data"
+        "400":
+          description: Bad request content
+        "404":
+          description: User not found
+          
   /preferences:
     # This is a HTTP operation
     get:
       tags:
         - preferences
-      summary: Get all preference key/value pairs
-      description: Get all possible preference key/value pairs, sorted by category and sub category
-      operationId: getAllPreferences
+      summary: Get all possible preference values sorted by category and sub category.
+      description: Get all possible preferences sorted by category and sub category. The output will be a list of type string containing all the possible values for the sub category.
+      operationId: RequestGetAllPossiblePreferences
       produces:
         - application/json
       responses:
@@ -94,8 +116,8 @@ paths:
       tags:
         - preferences
       summary: Get user preferences
-      description: Retrieves account preferences of the the user with {app_id}
-      operationId: getUserPreferencesByAppId
+      description: Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - The preferences the user does not have are not contained in the output!
+      operationId: RequestGetFavAppPreferenceData
       produces:
         - application/json
       parameters:
@@ -114,31 +136,60 @@ paths:
           description: Bad request content
         "404":
           description: User not found
-  /jackpots:
+    patch:
+      tags:
+        - preferences
+      summary: Update user preferences
+      description: Updates the account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - Only specify the preferences that apply to the user and leave out any preference that is 'false'.
+      operationId: RequestUpdateFavAppPreferenceData
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: app_id
+          description: App ID of user that needs to be fetched
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: preferences
+          description: User object that needs to be added to the backend CRM system
+          required: true
+          schema:
+            $ref: "#/definitions/categories"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Bad request content
+        "404":
+          description: User not found
+    
+  /jackpot_values:
     # This is a HTTP operation
     get:
       tags:
-        - jackpots
+        - jackpot_values
       summary: Retrieve all JackPot values
       description: Returns the Jackpot values of all HC locations
-      operationId: getJackPots
+      operationId: RequestGetProgressiveJPValues(ALL)
       produces:
         - application/json
       responses:
         "200":
           description: Successful operation
           schema:
-            $ref: "#/definitions/jackpots"
+            $ref: "#/definitions/jackpot_values_for_sites"
         "400":
           description: Bad request content
-  /jackpots/{site_code}:
+  /jackpot_values/{site_code}:
     # This is a HTTP operation
     get:
       tags:
-        - jackpots
+        - jackpot_values
       summary: Retrieve location JackPot values
       description: Returns the JackPot value from the casino with site code {site_code}. Site code is a code to identify an HC location.  
-      operationId: getJackpotBySiteCode
+      operationId: RequestGetProgressiveJPValues(siteCode)
       produces:
         - application/json
       parameters:
@@ -152,7 +203,7 @@ paths:
         "200":
           description: Successful operation
           schema:
-            $ref: "#/definitions/jackpots"
+            $ref: "#/definitions/jackpot_values_for_site"
         "400":
           description: Bad request content
         "404":
@@ -164,7 +215,7 @@ paths:
         - campaigns
       summary: Get campaigns for user
       description: Retrieve marketing campaigns that apply to user with ID {app_id}
-      operationId: getCampaignsByAppId
+      operationId: RequestGetCampaignDataByFavAppId
       produces:
         - application/json
       parameters:
@@ -190,7 +241,8 @@ definitions:
         type: string
         description: Unique ID representing a specific Favorites App user
       pers_id:
-        type: string
+        type: integer
+        format: int64
         description: When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.
       guest:
         $ref: "#/definitions/guest"
@@ -230,7 +282,8 @@ definitions:
       user_reference:
         $ref: "#/definitions/user_reference"
       pers_id:
-        type: string
+        type: integer
+        format: int64
         description: When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.        
       guest:
         $ref: "#/definitions/guest"
@@ -238,6 +291,22 @@ definitions:
         $ref: "#/definitions/card"
       loyalty:
           $ref: "#/definitions/loyalty"
+  all_user_data:
+    properties:
+      user_reference:
+        $ref: "#/definitions/user_reference"
+      pers_id:
+        type: string
+        description: When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.  
+      guest:
+        $ref: "#/definitions/guest"
+      card:
+        $ref: "#/definitions/card"
+      loyalty:
+          $ref: "#/definitions/loyalty"
+      categories:
+        $ref: "#/definitions/categories"
+        description: User preferences sorted per category and sub category
   user_reference:
     required:
       - app_id
@@ -255,11 +324,9 @@ definitions:
       - expiry_date
     properties:
       card_nr:
-        type: string
+        type: integer
+        format: int64
         description: The ID of the Favorites Card
-      loyalty_account_nr:
-        type: string 
-        description: Loyalty account number of the card user
       expiry_date:
         type: string
         format: date
@@ -267,12 +334,6 @@ definitions:
       type:
         type: string
         description: Description of the type of card
-  messages:
-    properties:
-      message: 
-        type: array
-        items:
-          type: string 
   loyalty:
     required:
       - account_nr
@@ -340,34 +401,41 @@ definitions:
       preferences:
         type: array
         items:
-          $ref: "#/definitions/preference"  
-  preference:
-    required:
-      - key
-      - value
-    properties:
-      key: 
-        type: string
-        description: Property key
-      value:
-        type: string
-        description: Property value
-    description: A key/value pair describing a user preference
-  jackpots:
+          type: string
+  jackpot_values_for_sites:
     type: array
     items:
-      $ref: "#/definitions/jackpot"
-    description: List of Jackpot objects, each holding a location and Jackpot value
-  jackpot:
-    required:
-      - location
-      - value
+      $ref: "#/definitions/jackpot_values_for_site"
+    description: List of all sites with all their respective jackpot values
+  jackpot_values_for_site:
     properties:
-      location:
+      site_code:
         type: string
-      value:
-        type: integer
-        format: int64
+        description: The code of the HC location (e.g. AMS for Amsterdam)
+      jackpot_values:
+        $ref: "#/definitions/jackpot_values"
+    description: List of Jackpot value objects for a particular site
+  jackpot_values:
+    type: array
+    items:
+      $ref: "#/definitions/jackpot_value"
+  jackpot_value:
+    properties:
+      name:
+        type: string
+        description: Name of the game (e.g. ZVT IGT Poke, Hot Shot)
+      levels:
+        type: array
+        items:
+          $ref: "#/definitions/level"
+  level:
+    properties:
+      name: 
+        type: string
+        description: The name of the level (e.g. Level 0)
+      amount:
+        type: number
+        description: The value of the Progressive Jackpot
   campaigns:
     properties:
       user_reference:
@@ -380,7 +448,6 @@ definitions:
     required:
       - code
       - name
-      - end_date
     properties:
       code:
         type: string

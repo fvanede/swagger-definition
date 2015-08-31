@@ -4,8 +4,8 @@ swagger: '2.0'
 
 # This is your document metadata
 info:
-  version: "0.2.0"
-  title: HC Favorites App web service.
+  version: "0.3.0 - 2015-08-31"
+  title: HC Favorites App RESTFul web service.
 # Describe your paths here
 paths:
   /users:
@@ -13,7 +13,7 @@ paths:
       tags:
         - users
       summary: Register / Login
-      description: Register a new user and/or login an existing user
+      description: Register a new user and/or login an existing user. When the user is a Favorites Card holder the following fields are mandatory; [pers_id, guest/birthdate, guest/email_address, guest/email_opt_in]. If the users' app_id is available it may be supplied, indicating the user has registered before as an Favorites App user. If the user is not a Favorites Card user yet, the following fields are mandatory; [guest / [initials, surname, birh_date, gender, email_address, email_opt_in]]. The surname prefix (e.g. van, van de, van 't, op 't) is not mandatory. The common fields that are mandatory for both Favorites Card holders and non-Favorites Card holders are; [ birth_date, email_address, email_opt_in ].
       operationId: RequestRegisterFavAppUser
       consumes:
         - application/json
@@ -55,8 +55,7 @@ paths:
           name: app_id
           description: App ID of user that needs to be fetched
           required: true
-          type: integer
-          format: int64
+          type: string
       responses:
         "200":
           description: Successful operation
@@ -108,8 +107,8 @@ paths:
           description: Successful operation
           schema:
             $ref: "#/definitions/categories"
-        "400":
-          description: Bad request
+        "404":
+          description: No preferences found
   /preferences/{app_id}:
     # This is a HTTP operation
     get:
@@ -125,8 +124,7 @@ paths:
           name: app_id
           description: App ID of user that needs to be fetched
           required: true
-          type: integer
-          format: int64
+          type: string
       responses:
         "200":
           description: Successful operation
@@ -149,8 +147,7 @@ paths:
           name: app_id
           description: App ID of user that needs to be fetched
           required: true
-          type: integer
-          format: int64
+          type: string
         - in: body
           name: preferences
           description: User object that needs to be added to the backend CRM system
@@ -180,8 +177,8 @@ paths:
           description: Successful operation
           schema:
             $ref: "#/definitions/jackpot_values_for_sites"
-        "400":
-          description: Bad request content
+        "404":
+          description: Not found
   /jackpot_values/{site_code}:
     # This is a HTTP operation
     get:
@@ -223,8 +220,7 @@ paths:
           name: app_id
           description: App ID of the user
           required: true
-          type: integer
-          format: int64
+          type: string
       responses:
         "200":
           description: Successful operation
@@ -306,7 +302,7 @@ definitions:
           $ref: "#/definitions/loyalty"
       categories:
         $ref: "#/definitions/categories"
-        description: User preferences sorted per category and sub category
+        description: User preferences sorted per category
   user_reference:
     required:
       - app_id
@@ -382,23 +378,14 @@ definitions:
     type: array
     items:
       $ref: "#/definitions/category"
-      description: A list of of objects of a preference category. Examples of Categories are for instance Game, Entertainment and Locations.
+      description: A list of preferences. Examples of Categories are for instance Game, Entertainment and Locations.
   category:
     properties:
       name:
         type: string
         description: The name of the category
-      sub_categories:
-        type: array
-        items:
-          $ref: "#/definitions/sub_category"
-        description: A list of of objects of a preference sub category. Examples of sub_categories for the category "Game" are for instance "Tablegame" and "Slotmachine"]. If a category does not have sub categories, the name of the sub category is the same as the name of the category.
-  sub_category:
-    properties:
-      name:
-        type: string
-        description: The name of the sub category
       preferences:
+        description: A list of values e.g. [blackjack, roulette] indicating the users' favorite games
         type: array
         items:
           type: string

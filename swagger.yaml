@@ -4,7 +4,7 @@ swagger: '2.0'
 
 # This is your document metadata
 info:
-  version: "0.3.0 - 2015-08-31"
+  version: "0.3.1 - 2015-08-31"
   title: HC Favorites App RESTFul web service.
 # Describe your paths here
 paths:
@@ -400,12 +400,10 @@ definitions:
         type: string
         description: The code of the HC location (e.g. AMS for Amsterdam)
       jackpot_values:
-        $ref: "#/definitions/jackpot_values"
+        type: array
+        items:
+          $ref: "#/definitions/jackpot_value"
     description: List of Jackpot value objects for a particular site
-  jackpot_values:
-    type: array
-    items:
-      $ref: "#/definitions/jackpot_value"
   jackpot_value:
     properties:
       name:

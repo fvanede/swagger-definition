@@ -1,0 +1,2173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <title>HC Favorites App RESTFul web service.</title>
+</head>
+<body>
+<div class="container">
+    <h1>HC Favorites App RESTFul web service.</h1>
+<p></p>
+
+<h2>Summary</h2>
+<table class="table table-bordered table-condensed swagger--summary">
+    <thead>
+    <tr>
+        <th>Path</th>
+        <th>Operation</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+                    <td class="swagger--summary-path" rowspan="1">
+                        <a href="#path--campaigns--app_id-">/campaigns/{app_id}</a>
+                    </td>
+                <td>
+                    <a href="#operation--campaigns--app_id--get">GET</a>
+                </td>
+                <td>
+                    <p>Get campaigns for user</p>
+
+                </td>
+            </tr>
+            <tr>
+                    <td class="swagger--summary-path" rowspan="1">
+                        <a href="#path--jackpot_values">/jackpot_values</a>
+                    </td>
+                <td>
+                    <a href="#operation--jackpot_values-get">GET</a>
+                </td>
+                <td>
+                    <p>Retrieve all JackPot values</p>
+
+                </td>
+            </tr>
+            <tr>
+                    <td class="swagger--summary-path" rowspan="1">
+                        <a href="#path--jackpot_values--site_code-">/jackpot_values/{site_code}</a>
+                    </td>
+                <td>
+                    <a href="#operation--jackpot_values--site_code--get">GET</a>
+                </td>
+                <td>
+                    <p>Retrieve location JackPot values</p>
+
+                </td>
+            </tr>
+            <tr>
+                    <td class="swagger--summary-path" rowspan="1">
+                        <a href="#path--preferences">/preferences</a>
+                    </td>
+                <td>
+                    <a href="#operation--preferences-get">GET</a>
+                </td>
+                <td>
+                    <p>Get all possible preference values sorted by category and sub category.</p>
+
+                </td>
+            </tr>
+            <tr>
+                    <td class="swagger--summary-path" rowspan="2">
+                        <a href="#path--preferences--app_id-">/preferences/{app_id}</a>
+                    </td>
+                <td>
+                    <a href="#operation--preferences--app_id--get">GET</a>
+                </td>
+                <td>
+                    <p>Get user preferences</p>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="#operation--preferences--app_id--patch">PATCH</a>
+                </td>
+                <td>
+                    <p>Update user preferences</p>
+
+                </td>
+            </tr>
+            <tr>
+                    <td class="swagger--summary-path" rowspan="1">
+                        <a href="#path--users">/users</a>
+                    </td>
+                <td>
+                    <a href="#operation--users-post">POST</a>
+                </td>
+                <td>
+                    <p>Register / Login</p>
+
+                </td>
+            </tr>
+            <tr>
+                    <td class="swagger--summary-path" rowspan="1">
+                        <a href="#path--users--app_id-">/users/{app_id}</a>
+                    </td>
+                <td>
+                    <a href="#operation--users--app_id--get">GET</a>
+                </td>
+                <td>
+                    <p>Get user&#39;s account and loyalty data</p>
+
+                </td>
+            </tr>
+            <tr>
+                    <td class="swagger--summary-path" rowspan="1">
+                        <a href="#path--users--app_id--all_data">/users/{app_id}/all_data</a>
+                    </td>
+                <td>
+                    <a href="#operation--users--app_id--all_data-get">GET</a>
+                </td>
+                <td>
+                    <p>Get all the user&#39;s data</p>
+
+                </td>
+            </tr>
+    </tbody>
+</table>
+
+
+
+<h2>Paths</h2>
+
+    
+<span id="path--campaigns--app_id-"></span>
+    <div id="operation--campaigns--app_id--get" class="swagger--panel-operation-get panel">
+    <div class="panel-heading">
+        <div class="operation-summary">Get campaigns for user</div>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/campaigns/{app_id}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-operation-description">
+            <p>Retrieve marketing campaigns that apply to user with ID {app_id}</p>
+
+        </section>
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>app_id
+                            <span class="json-property-required"></span>
+                        </td>
+                    <td><p>App ID of the user</p>
+</td>
+                    <td>path</td>
+                    <td>
+                        <span class="json-property-type">
+        string
+</span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p><span class="label label-default">application/json</span> </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Successful operation</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/campaigns">campaigns</a>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/campaigns">campaigns</a>
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Bad request content</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>User not found</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+<span id="path--jackpot_values"></span>
+    <div id="operation--jackpot_values-get" class="swagger--panel-operation-get panel">
+    <div class="panel-heading">
+        <div class="operation-summary">Retrieve all JackPot values</div>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/jackpot_values</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-operation-description">
+            <p>Returns the Jackpot values of all HC locations</p>
+
+        </section>
+        
+        
+    <section class="sw-response-body">
+        <p><span class="label label-default">application/json</span> </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Successful operation</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/jackpot_values_for_sites">jackpot_values_for_sites</a>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/jackpot_values_for_sites">jackpot_values_for_sites</a>
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Not found</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+<span id="path--jackpot_values--site_code-"></span>
+    <div id="operation--jackpot_values--site_code--get" class="swagger--panel-operation-get panel">
+    <div class="panel-heading">
+        <div class="operation-summary">Retrieve location JackPot values</div>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/jackpot_values/{site_code}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-operation-description">
+            <p>Returns the JackPot value from the casino with site code {site_code}. Site code is a code to identify an HC location.</p>
+
+        </section>
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>site_code
+                            <span class="json-property-required"></span>
+                        </td>
+                    <td><p>Site code of the casino</p>
+</td>
+                    <td>path</td>
+                    <td>
+                        <span class="json-property-type">
+        integer
+</span>
+    <span class="json-property-format">(int64)</span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p><span class="label label-default">application/json</span> </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Successful operation</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/jackpot_values_for_site">jackpot_values_for_site</a>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/jackpot_values_for_site">jackpot_values_for_site</a>
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Bad request content</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Site code not found</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+<span id="path--preferences"></span>
+    <div id="operation--preferences-get" class="swagger--panel-operation-get panel">
+    <div class="panel-heading">
+        <div class="operation-summary">Get all possible preference values sorted by category and sub category.</div>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/preferences</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-operation-description">
+            <p>Get all possible preferences sorted by category and sub category. The output will be a list of type string containing all the possible values for the sub category.</p>
+
+        </section>
+        
+        
+    <section class="sw-response-body">
+        <p><span class="label label-default">application/json</span> </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Successful operation</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/categories">categories</a>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/categories">categories</a>
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>No preferences found</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+<span id="path--preferences--app_id-"></span>
+    <div id="operation--preferences--app_id--get" class="swagger--panel-operation-get panel">
+    <div class="panel-heading">
+        <div class="operation-summary">Get user preferences</div>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/preferences/{app_id}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-operation-description">
+            <p>Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is &#39;true&#39;). IMPORTANT - The preferences the user does not have are not contained in the output!</p>
+
+        </section>
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>app_id
+                            <span class="json-property-required"></span>
+                        </td>
+                    <td><p>App ID of user that needs to be fetched</p>
+</td>
+                    <td>path</td>
+                    <td>
+                        <span class="json-property-type">
+        string
+</span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p><span class="label label-default">application/json</span> </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Successful operation</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/user_preferences">user_preferences</a>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/user_preferences">user_preferences</a>
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Bad request content</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>User not found</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    <div id="operation--preferences--app_id--patch" class="swagger--panel-operation-patch panel">
+    <div class="panel-heading">
+        <div class="operation-summary">Update user preferences</div>
+        <h3 class="panel-title"><span class="operation-name">PATCH</span> <strong>/preferences/{app_id}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-operation-description">
+            <p>Updates the account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is &#39;true&#39;). IMPORTANT - Only specify the preferences that apply to the user and leave out any preference that is &#39;false&#39;.</p>
+
+        </section>
+            
+    <section class="sw-request-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><p>User object that needs to be added to the backend CRM system</p>
+</p>
+                    </div>
+                    <div class="col-md-6 sw-request-model">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/categories">categories</a>
+
+    </div>
+</div></div>
+                </div>
+    </section>        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>app_id
+                            <span class="json-property-required"></span>
+                        </td>
+                    <td><p>App ID of user that needs to be fetched</p>
+</td>
+                    <td>path</td>
+                    <td>
+                        <span class="json-property-type">
+        string
+</span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p><span class="label label-default">application/json</span> </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Successful operation</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Bad request content</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>User not found</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+<span id="path--users"></span>
+    <div id="operation--users-post" class="swagger--panel-operation-post panel">
+    <div class="panel-heading">
+        <div class="operation-summary">Register / Login</div>
+        <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/users</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-operation-description">
+            <p>Register a new user and/or login an existing user. When the user is a Favorites Card holder the following fields are mandatory; [pers_id, guest/birthdate, guest/email_address, guest/email_opt_in]. If the users&#39; app_id is available it may be supplied, indicating the user has registered before as an Favorites App user. If the user is not a Favorites Card user yet, the following fields are mandatory; [guest / [initials, surname, birh_date, gender, email_address, email_opt_in]]. The surname prefix (e.g. van, van de, van &#39;t, op &#39;t) is not mandatory. The common fields that are mandatory for both Favorites Card holders and non-Favorites Card holders are; [ birth_date, email_address, email_opt_in ].</p>
+
+        </section>
+            
+    <section class="sw-request-body">
+            <p><span class="label label-default">application/json</span> </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><p>User object that needs to be added to the backend CRM system</p>
+</p>
+                    </div>
+                    <div class="col-md-6 sw-request-model">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/credentials">credentials</a>
+
+    </div>
+</div></div>
+                </div>
+    </section>        
+        
+    <section class="sw-response-body">
+        <p><span class="label label-default">application/json</span> </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Successful operation - user is known and returned (no need to create again)</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>201</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>User created</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Not found</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>405</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Invalid input</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+<span id="path--users--app_id-"></span>
+    <div id="operation--users--app_id--get" class="swagger--panel-operation-get panel">
+    <div class="panel-heading">
+        <div class="operation-summary">Get user&apos;s account and loyalty data</div>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/users/{app_id}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-operation-description">
+            <p>Returns loyalty data and other account information of the user with ID {app_id}</p>
+
+        </section>
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>app_id
+                            <span class="json-property-required"></span>
+                        </td>
+                    <td><p>App ID of user that needs to be fetched</p>
+</td>
+                    <td>path</td>
+                    <td>
+                        <span class="json-property-type">
+        string
+</span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p><span class="label label-default">application/json</span> </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Successful operation</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/user">user</a>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/user">user</a>
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Bad request content</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>User not found</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+<span id="path--users--app_id--all_data"></span>
+    <div id="operation--users--app_id--all_data-get" class="swagger--panel-operation-get panel">
+    <div class="panel-heading">
+        <div class="operation-summary">Get all the user&apos;s data</div>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/users/{app_id}/all_data</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-operation-description">
+            <p>Get all the user&#39;s data including preferences, loyalty points, user data etc.</p>
+
+        </section>
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>app_id
+                            <span class="json-property-required"></span>
+                        </td>
+                    <td><p>App ID of user that needs to be fetched</p>
+</td>
+                    <td>path</td>
+                    <td>
+                        <span class="json-property-type">
+        integer
+</span>
+    <span class="json-property-format">(int64)</span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p><span class="label label-default">application/json</span> </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Successful operation</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/all_user_data">all_user_data</a>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/all_user_data">all_user_data</a>
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Bad request content</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>User not found</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>
+
+<h2>Definitions</h2>
+
+    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/credentials"></a>credentials:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">app_id:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Unique ID representing a specific Favorites App user</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">pers_id:</span>
+                <span class="json-property-type">
+        integer
+</span>
+    <span class="json-property-format">(int64)</span>
+
+            </dt>
+            <dd>
+                <p>When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">guest:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/guest">guest</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/guest"></a>guest:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">initials:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Initials of the user</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">surname_prefix:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Holds the user&#39;s preposition if applicable (e.g. van, van der, von, de, &#39;t, van &#39;t)</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">surname:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>The user&#39;s family name or last name</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">birth_date:</span>
+                <span class="json-property-type">
+        string
+</span>
+    <span class="json-property-format">(date)</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>The user&#39;s date of birth</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">gender:</span>
+                <span class="json-property-type">
+        string
+</span>
+    <span class="json-property-enum" title="Possible values">&isin; {
+            <span class="json-property-enum-item">Male</span>
+            ,
+
+            <span class="json-property-enum-item">Female</span>
+            
+
+        }
+        </span>
+
+            </dt>
+            <dd>
+                <p>The user&#39;s gender</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">email_address:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>The user&#39;s preferred E-mail address</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">email_opt_in:</span>
+                <span class="json-property-type">
+        boolean
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>The user can accept e-mails from HC (true) or decline mails (false)</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/user"></a>user:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">user_reference:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">pers_id:</span>
+                <span class="json-property-type">
+        integer
+</span>
+    <span class="json-property-format">(int64)</span>
+
+            </dt>
+            <dd>
+                <p>When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">guest:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/guest">guest</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">card:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/card">card</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">loyalty:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/loyalty">loyalty</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/all_user_data"></a>all_user_data:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">user_reference:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">pers_id:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">guest:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/guest">guest</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">card:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/card">card</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">loyalty:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/loyalty">loyalty</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">categories:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/categories">categories</a>
+</span>
+
+            </dt>
+            <dd>
+                <p>User preferences sorted per category</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/user_reference"></a>user_reference:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">app_id:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>Unique ID representing a specific Favorites App user</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">is_promotable:</span>
+                <span class="json-property-type">
+        boolean
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>Indicates if the user may visit a HC location or is on the blacklist (banned temporarily or permanent)</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/card"></a>card:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">card_nr:</span>
+                <span class="json-property-type">
+        integer
+</span>
+    <span class="json-property-format">(int64)</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>The ID of the Favorites Card</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">expiry_date:</span>
+                <span class="json-property-type">
+        string
+</span>
+    <span class="json-property-format">(date)</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>The expiry date of the Favorites Card</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">type:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Description of the type of card</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/loyalty"></a>loyalty:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">account_nr:</span>
+                <span class="json-property-type">
+        integer
+</span>
+    <span class="json-property-format">(int64)</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">points:</span>
+                <span class="json-property-type">
+        integer
+</span>
+    <span class="json-property-format">(int64)</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">current_segment:</span>
+                <span class="json-property-type">
+        object
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                        <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">code:</span>
+                <span class="json-property-type">
+        integer
+</span>
+    <span class="json-property-format">(int32)</span>
+
+            </dt>
+            <dd>
+                <p>The code of the user&#39;s current loyalty segment</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">value:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Description of the users&#39;s current loyalty segment (e.g. Black Favorites Card)</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">next_segment:</span>
+                <span class="json-property-type">
+        object
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                        <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">code:</span>
+                <span class="json-property-type">
+        integer
+</span>
+    <span class="json-property-format">(int32)</span>
+
+            </dt>
+            <dd>
+                <p>The code of the next loyalty segment the user can reach</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">value:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Description of loyalty segment the user can reach</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">remaining_visits:</span>
+                <span class="json-property-type">
+        integer
+</span>
+    <span class="json-property-format">(int32)</span>
+
+            </dt>
+            <dd>
+                <p>The number of visits the user needs to reach the next loyalty segment</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">remaining_visits_expiry_date:</span>
+                <span class="json-property-type">
+        string
+</span>
+    <span class="json-property-format">(date)</span>
+
+            </dt>
+            <dd>
+                <p>Remaining visits need to be done before expiry date</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/user_preferences"></a>user_preferences:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">user_reference:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">categories:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/categories">categories</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/categories"></a>categories:
+                    <span class="json-property-type"><span class="json-property-type">
+        object[]
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+            <a class="json-schema-ref" href="#/definitions/category">category</a>
+    <section class="json-schema-description">
+        <p>A list of preferences. Examples of Categories are for instance Game, Entertainment and Locations.</p>
+
+    </section>
+
+    </div>
+</section>    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/category"></a>category:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">name:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>The name of the category</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">preferences:</span>
+                <span class="json-property-type">
+        string[]
+</span>
+
+            </dt>
+            <dd>
+                <p>A list of values e.g. [blackjack, roulette] indicating the users&#39; favorite games</p>
+
+                <div class="json-inner-schema">
+                    
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+        
+    </div>
+</section>                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/jackpot_values_for_sites"></a>jackpot_values_for_sites:
+                    <span class="json-property-type"><span class="json-property-type">
+        object[]
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-description">
+        <p>List of all sites with all their respective jackpot values</p>
+
+    </section>
+
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+            <a class="json-schema-ref" href="#/definitions/jackpot_values_for_site">jackpot_values_for_site</a>
+
+    </div>
+</section>    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/jackpot_values_for_site"></a>jackpot_values_for_site:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-description">
+        <p>List of Jackpot value objects for a particular site</p>
+
+    </section>
+    <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">site_code:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>The code of the HC location (e.g. AMS for Amsterdam)</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">jackpot_values:</span>
+                <span class="json-property-type">
+        object[]
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+            <a class="json-schema-ref" href="#/definitions/jackpot_value">jackpot_value</a>
+
+    </div>
+</section>                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/jackpot_value"></a>jackpot_value:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">name:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Name of the game (e.g. ZVT IGT Poke, Hot Shot)</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">levels:</span>
+                <span class="json-property-type">
+        object[]
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+            <a class="json-schema-ref" href="#/definitions/level">level</a>
+
+    </div>
+</section>                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/level"></a>level:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">name:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>The name of the level (e.g. Level 0)</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">amount:</span>
+                <span class="json-property-type">
+        number
+</span>
+
+            </dt>
+            <dd>
+                <p>The value of the Progressive Jackpot</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/campaigns"></a>campaigns:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">user_reference:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">campaigns:</span>
+                <span class="json-property-type">
+        object[]
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+            <a class="json-schema-ref" href="#/definitions/campaign">campaign</a>
+
+    </div>
+</section>                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/campaign"></a>campaign:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">code:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>Internal code of the marketing campaign</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">name:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>Description of the marketing campaign</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">description:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Textual description of the marketing campaign</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">image_type:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Reference to a picture that could be shown to the user</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">start_date:</span>
+                <span class="json-property-type">
+        string
+</span>
+    <span class="json-property-format">(date)</span>
+
+            </dt>
+            <dd>
+                <p>Start date of the campaign</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">end_date:</span>
+                <span class="json-property-type">
+        string
+</span>
+    <span class="json-property-format">(date)</span>
+
+            </dt>
+            <dd>
+                <p>End date of the campaign</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div></div>
+</body>
+</html>

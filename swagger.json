@@ -1,0 +1,649 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.3.1 - 2015-08-31",
+        "title": "HC Favorites App RESTFul web service."
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Register / Login",
+                "description": "Register a new user and/or login an existing user. When the user is a Favorites Card holder the following fields are mandatory; [pers_id, guest/birthdate, guest/email_address, guest/email_opt_in]. If the users' app_id is available it may be supplied, indicating the user has registered before as an Favorites App user. If the user is not a Favorites Card user yet, the following fields are mandatory; [guest / [initials, surname, birh_date, gender, email_address, email_opt_in]]. The surname prefix (e.g. van, van de, van 't, op 't) is not mandatory. The common fields that are mandatory for both Favorites Card holders and non-Favorites Card holders are; [ birth_date, email_address, email_opt_in ].",
+                "operationId": "RequestRegisterFavAppUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "credentials",
+                        "description": "User object that needs to be added to the backend CRM system",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/credentials"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation - user is known and returned (no need to create again)",
+                        "schema": {
+                            "$ref": "#/definitions/user_reference"
+                        }
+                    },
+                    "201": {
+                        "description": "User created",
+                        "schema": {
+                            "$ref": "#/definitions/user_reference"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/users/{app_id}": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get user's account and loyalty data",
+                "description": "Returns loyalty data and other account information of the user with ID {app_id}",
+                "operationId": "RequestFavGuestData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "app_id",
+                        "description": "App ID of user that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/user"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request content"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/users/{app_id}/all_data": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get all the user's data",
+                "description": "Get all the user's data including preferences, loyalty points, user data etc.",
+                "operationId": "RequestGetFavAppAllData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "app_id",
+                        "description": "App ID of user that needs to be fetched",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/all_user_data"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request content"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/preferences": {
+            "get": {
+                "tags": [
+                    "preferences"
+                ],
+                "summary": "Get all possible preference values sorted by category and sub category.",
+                "description": "Get all possible preferences sorted by category and sub category. The output will be a list of type string containing all the possible values for the sub category.",
+                "operationId": "RequestGetAllPossiblePreferences",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/categories"
+                        }
+                    },
+                    "404": {
+                        "description": "No preferences found"
+                    }
+                }
+            }
+        },
+        "/preferences/{app_id}": {
+            "get": {
+                "tags": [
+                    "preferences"
+                ],
+                "summary": "Get user preferences",
+                "description": "Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - The preferences the user does not have are not contained in the output!",
+                "operationId": "RequestGetFavAppPreferenceData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "app_id",
+                        "description": "App ID of user that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/user_preferences"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request content"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "preferences"
+                ],
+                "summary": "Update user preferences",
+                "description": "Updates the account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - Only specify the preferences that apply to the user and leave out any preference that is 'false'.",
+                "operationId": "RequestUpdateFavAppPreferenceData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "app_id",
+                        "description": "App ID of user that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "preferences",
+                        "description": "User object that needs to be added to the backend CRM system",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/categories"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request content"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/jackpot_values": {
+            "get": {
+                "tags": [
+                    "jackpot_values"
+                ],
+                "summary": "Retrieve all JackPot values",
+                "description": "Returns the Jackpot values of all HC locations",
+                "operationId": "RequestGetProgressiveJPValues(ALL)",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/jackpot_values_for_sites"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/jackpot_values/{site_code}": {
+            "get": {
+                "tags": [
+                    "jackpot_values"
+                ],
+                "summary": "Retrieve location JackPot values",
+                "description": "Returns the JackPot value from the casino with site code {site_code}. Site code is a code to identify an HC location.",
+                "operationId": "RequestGetProgressiveJPValues(siteCode)",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "site_code",
+                        "description": "Site code of the casino",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/jackpot_values_for_site"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request content"
+                    },
+                    "404": {
+                        "description": "Site code not found"
+                    }
+                }
+            }
+        },
+        "/campaigns/{app_id}": {
+            "get": {
+                "tags": [
+                    "campaigns"
+                ],
+                "summary": "Get campaigns for user",
+                "description": "Retrieve marketing campaigns that apply to user with ID {app_id}",
+                "operationId": "RequestGetCampaignDataByFavAppId",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "app_id",
+                        "description": "App ID of the user",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/campaigns"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request content"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "credentials": {
+            "properties": {
+                "app_id": {
+                    "type": "string",
+                    "description": "Unique ID representing a specific Favorites App user"
+                },
+                "pers_id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user."
+                },
+                "guest": {
+                    "$ref": "#/definitions/guest"
+                }
+            }
+        },
+        "guest": {
+            "required": [
+                "birth_date",
+                "email_address",
+                "email_opt_in"
+            ],
+            "properties": {
+                "initials": {
+                    "type": "string",
+                    "description": "Initials of the user"
+                },
+                "surname_prefix": {
+                    "type": "string",
+                    "description": "Holds the user's preposition if applicable (e.g. van, van der, von, de, 't, van 't)"
+                },
+                "surname": {
+                    "type": "string",
+                    "description": "The user's family name or last name"
+                },
+                "birth_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The user's date of birth"
+                },
+                "gender": {
+                    "type": "string",
+                    "enum": [
+                        "Male",
+                        "Female"
+                    ],
+                    "description": "The user's gender"
+                },
+                "email_address": {
+                    "type": "string",
+                    "description": "The user's preferred E-mail address"
+                },
+                "email_opt_in": {
+                    "type": "boolean",
+                    "description": "The user can accept e-mails from HC (true) or decline mails (false)"
+                }
+            }
+        },
+        "user": {
+            "properties": {
+                "user_reference": {
+                    "$ref": "#/definitions/user_reference"
+                },
+                "pers_id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user."
+                },
+                "guest": {
+                    "$ref": "#/definitions/guest"
+                },
+                "card": {
+                    "$ref": "#/definitions/card"
+                },
+                "loyalty": {
+                    "$ref": "#/definitions/loyalty"
+                }
+            }
+        },
+        "all_user_data": {
+            "properties": {
+                "user_reference": {
+                    "$ref": "#/definitions/user_reference"
+                },
+                "pers_id": {
+                    "type": "string",
+                    "description": "When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user."
+                },
+                "guest": {
+                    "$ref": "#/definitions/guest"
+                },
+                "card": {
+                    "$ref": "#/definitions/card"
+                },
+                "loyalty": {
+                    "$ref": "#/definitions/loyalty"
+                },
+                "categories": {
+                    "$ref": "#/definitions/categories",
+                    "description": "User preferences sorted per category"
+                }
+            }
+        },
+        "user_reference": {
+            "required": [
+                "app_id",
+                "is_promotable"
+            ],
+            "properties": {
+                "app_id": {
+                    "type": "string",
+                    "description": "Unique ID representing a specific Favorites App user"
+                },
+                "is_promotable": {
+                    "type": "boolean",
+                    "description": "Indicates if the user may visit a HC location or is on the blacklist (banned temporarily or permanent)"
+                }
+            }
+        },
+        "card": {
+            "required": [
+                "card_nr",
+                "expiry_date"
+            ],
+            "properties": {
+                "card_nr": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "The ID of the Favorites Card"
+                },
+                "expiry_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The expiry date of the Favorites Card"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Description of the type of card"
+                }
+            }
+        },
+        "loyalty": {
+            "required": [
+                "account_nr",
+                "points",
+                "current_segment"
+            ],
+            "properties": {
+                "account_nr": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "points": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "current_segment": {
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The code of the user's current loyalty segment"
+                        },
+                        "value": {
+                            "type": "string",
+                            "description": "Description of the users's current loyalty segment (e.g. Black Favorites Card)"
+                        }
+                    }
+                },
+                "next_segment": {
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The code of the next loyalty segment the user can reach"
+                        },
+                        "value": {
+                            "type": "string",
+                            "description": "Description of loyalty segment the user can reach"
+                        },
+                        "remaining_visits": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The number of visits the user needs to reach the next loyalty segment"
+                        },
+                        "remaining_visits_expiry_date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "Remaining visits need to be done before expiry date"
+                        }
+                    }
+                }
+            }
+        },
+        "user_preferences": {
+            "properties": {
+                "user_reference": {
+                    "$ref": "#/definitions/user_reference"
+                },
+                "categories": {
+                    "$ref": "#/definitions/categories"
+                }
+            }
+        },
+        "categories": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/category",
+                "description": "A list of preferences. Examples of Categories are for instance Game, Entertainment and Locations."
+            }
+        },
+        "category": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the category"
+                },
+                "preferences": {
+                    "description": "A list of values e.g. [blackjack, roulette] indicating the users' favorite games",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "jackpot_values_for_sites": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/jackpot_values_for_site"
+            },
+            "description": "List of all sites with all their respective jackpot values"
+        },
+        "jackpot_values_for_site": {
+            "properties": {
+                "site_code": {
+                    "type": "string",
+                    "description": "The code of the HC location (e.g. AMS for Amsterdam)"
+                },
+                "jackpot_values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/jackpot_value"
+                    }
+                }
+            },
+            "description": "List of Jackpot value objects for a particular site"
+        },
+        "jackpot_value": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the game (e.g. ZVT IGT Poke, Hot Shot)"
+                },
+                "levels": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/level"
+                    }
+                }
+            }
+        },
+        "level": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the level (e.g. Level 0)"
+                },
+                "amount": {
+                    "type": "number",
+                    "description": "The value of the Progressive Jackpot"
+                }
+            }
+        },
+        "campaigns": {
+            "properties": {
+                "user_reference": {
+                    "$ref": "#/definitions/user_reference"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/campaign"
+                    }
+                }
+            }
+        },
+        "campaign": {
+            "required": [
+                "code",
+                "name"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "Internal code of the marketing campaign"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Description of the marketing campaign"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Textual description of the marketing campaign"
+                },
+                "image_type": {
+                    "type": "string",
+                    "description": "Reference to a picture that could be shown to the user"
+                },
+                "start_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Start date of the campaign"
+                },
+                "end_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "End date of the campaign"
+                }
+            }
+        }
+    }
+}

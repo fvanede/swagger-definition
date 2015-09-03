@@ -47,8 +47,8 @@
                     "404": {
                         "description": "Not found"
                     },
-                    "405": {
-                        "description": "Invalid input"
+                    "422": {
+                        "description": "Unprocessible entity - the request is valid, but the syntax is incorrect"
                     }
                 }
             }

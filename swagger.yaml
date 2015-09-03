@@ -38,8 +38,8 @@ paths:
             $ref: "#/definitions/user_reference"
         "404":
           description: Not found
-        "405":
-          description: Invalid input
+        "422":
+          description: Unprocessible entity - the request is valid, but the syntax is incorrect
   # This is a path endpoint. Change it.
   /users/{app_id}:
     # This is a HTTP operation

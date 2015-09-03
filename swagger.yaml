@@ -4,8 +4,9 @@ swagger: '2.0'
 
 # This is your document metadata
 info:
-  version: "0.3.1 - 2015-08-31"
+  version: "0.3.2 - 2015-09-03"
   title: HC Favorites App RESTFul web service.
+  description: The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape.
 # Describe your paths here
 paths:
   /users:

@@ -4,7 +4,7 @@ swagger: '2.0'
 
 # This is your document metadata
 info:
-  version: "0.3.2 - 2015-09-03"
+  version: "0.3.3 - 2015-09-07"
   title: HC Favorites App RESTFul web service.
   description: The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape.
 # Describe your paths here
@@ -29,13 +29,13 @@ paths:
             $ref: "#/definitions/credentials"
       responses:
         "200":
-          description: Successful operation - user is known and returned (no need to create again)
+          description: Successful operation - user is known and returned (no need to create again). Although the 'user' object has room for 'guest', 'card', 'loyalty' and 'preferences' information, only the information contained in 'user_reference' and 'pers_id' will be returned.
           schema:
-            $ref: "#/definitions/user_reference"
+            $ref: "#/definitions/user"
         "201":
-          description: User created
+          description: User created. Although the 'user' object has room for 'guest', 'card', 'loyalty' and 'preferences' information, only the information contained in 'user_reference' and 'pers_id' will be returned.
           schema:
-            $ref: "#/definitions/user_reference"
+            $ref: "#/definitions/user"
         "404":
           description: Not found
         "422":
@@ -59,7 +59,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Successful operation
+          description: Successful operation. Although the 'preferences' block is available in a 'user' object, it will not be returned in this call. You should use the 'all_data' operation or use the 'preferences' service.
           schema:
             $ref: "#/definitions/user"
         "400":
@@ -87,7 +87,7 @@ paths:
         "200":
           description: Successful operation
           schema:
-            $ref: "#/definitions/all_user_data"
+            $ref: "#/definitions/user"
         "400":
           description: Bad request content
         "404":
@@ -107,7 +107,7 @@ paths:
         "200":
           description: Successful operation
           schema:
-            $ref: "#/definitions/categories"
+            $ref: "#/definitions/preferences"
         "404":
           description: No preferences found
   /preferences/{app_id}:
@@ -116,7 +116,7 @@ paths:
       tags:
         - preferences
       summary: Get user preferences
-      description: Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - The preferences the user does not have are not contained in the output!
+      description: Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - The preferences the user does not have (the ones that are 'false') are not contained in the output!
       operationId: RequestGetFavAppPreferenceData
       produces:
         - application/json
@@ -139,7 +139,7 @@ paths:
       tags:
         - preferences
       summary: Update user preferences
-      description: Updates the account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - Only specify the preferences that apply to the user and leave out any preference that is 'false'.
+      description: Updates the account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - Only specify the preferences that apply to the user (those that are 'true') and leave out any preference that is 'false'.
       operationId: RequestUpdateFavAppPreferenceData
       produces:
         - application/json
@@ -154,7 +154,7 @@ paths:
           description: User object that needs to be added to the backend CRM system
           required: true
           schema:
-            $ref: "#/definitions/categories"
+            $ref: "#/definitions/preferences"
       responses:
         "200":
           description: Successful operation
@@ -177,7 +177,7 @@ paths:
         "200":
           description: Successful operation
           schema:
-            $ref: "#/definitions/jackpot_values_for_sites"
+            $ref: "#/definitions/jackpot_values"
         "404":
           description: Not found
   /jackpot_values/{site_code}:
@@ -186,7 +186,7 @@ paths:
       tags:
         - jackpot_values
       summary: Retrieve location JackPot values
-      description: Returns the JackPot value from the casino with site code {site_code}. Site code is a code to identify an HC location.  
+      description: Returns a list with one site (from {site_code} obviously. Of this site, a list of Jackpot values is returned.
       operationId: RequestGetProgressiveJPValues(siteCode)
       produces:
         - application/json
@@ -199,9 +199,9 @@ paths:
           format: int64
       responses:
         "200":
-          description: Successful operation
+          description: Successful operation. Jackpot values for site {site_code} are returned.
           schema:
-            $ref: "#/definitions/jackpot_values_for_site"
+            $ref: "#/definitions/jackpot_values"
         "400":
           description: Bad request content
         "404":
@@ -275,6 +275,9 @@ definitions:
         type: boolean
         description: The user can accept e-mails from HC (true) or decline mails (false)
   user:
+    required:
+      - user_reference
+      - pers_id
     properties:
       user_reference:
         $ref: "#/definitions/user_reference"
@@ -288,21 +291,8 @@ definitions:
         $ref: "#/definitions/card"
       loyalty:
           $ref: "#/definitions/loyalty"
-  all_user_data:
-    properties:
-      user_reference:
-        $ref: "#/definitions/user_reference"
-      pers_id:
-        type: string
-        description: When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.  
-      guest:
-        $ref: "#/definitions/guest"
-      card:
-        $ref: "#/definitions/card"
-      loyalty:
-          $ref: "#/definitions/loyalty"
-      categories:
-        $ref: "#/definitions/categories"
+      preferences:
+        $ref: "#/definitions/preferences"
         description: User preferences sorted per category
   user_reference:
     required:
@@ -373,39 +363,39 @@ definitions:
     properties:
       user_reference:
         $ref: "#/definitions/user_reference"
-      categories:
-        $ref: "#/definitions/categories"
-  categories:
+      preferences:
+        $ref: "#/definitions/preferences"
+  preferences:
     type: array
     items:
-      $ref: "#/definitions/category"
+      $ref: "#/definitions/preference"
       description: A list of preferences. Examples of Categories are for instance Game, Entertainment and Locations.
-  category:
+  preference:
     properties:
       name:
         type: string
         description: The name of the category
-      preferences:
+      values:
         description: A list of values e.g. [blackjack, roulette] indicating the users' favorite games
         type: array
         items:
           type: string
-  jackpot_values_for_sites:
+  jackpot_values:
     type: array
     items:
-      $ref: "#/definitions/jackpot_values_for_site"
-    description: List of all sites with all their respective jackpot values
-  jackpot_values_for_site:
+      $ref: "#/definitions/jackpot_value_for_site"
+    description: One site or a list of sites with a list of jackpot values per site.
+  jackpot_value_for_site:
     properties:
       site_code:
         type: string
         description: The code of the HC location (e.g. AMS for Amsterdam)
-      jackpot_values:
+      values:
         type: array
         items:
-          $ref: "#/definitions/jackpot_value"
+          $ref: "#/definitions/value"
     description: List of Jackpot value objects for a particular site
-  jackpot_value:
+  value:
     properties:
       name:
         type: string

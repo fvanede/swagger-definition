@@ -281,7 +281,7 @@
                             
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/jackpot_values_for_sites">jackpot_values_for_sites</a>
+            <a class="json-schema-ref" href="#/definitions/jackpot_values">jackpot_values</a>
 
     </div>
 </div>                        </section>
@@ -289,7 +289,7 @@
                     <td class="hidden-xs hidden-sm">
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/jackpot_values_for_sites">jackpot_values_for_sites</a>
+            <a class="json-schema-ref" href="#/definitions/jackpot_values">jackpot_values</a>
 
     </div>
 </div></td>
@@ -322,7 +322,7 @@
     </div>
     <div class="panel-body">
         <section class="sw-operation-description">
-            <p>Returns the JackPot value from the casino with site code {site_code}. Site code is a code to identify an HC location.</p>
+            <p>Returns a list with one site (from {site_code} obviously. Of this site, a list of Jackpot values is returned.</p>
 
         </section>
         
@@ -372,14 +372,14 @@
                     <td>200</td>
                     <td>
                         <div class="sw-response-description-text">
-                            <p>Successful operation</p>
+                            <p>Successful operation. Jackpot values for site {site_code} are returned.</p>
 
                         </div>
                         <section class="visible-xs visible-sm">
                             
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/jackpot_values_for_site">jackpot_values_for_site</a>
+            <a class="json-schema-ref" href="#/definitions/jackpot_values">jackpot_values</a>
 
     </div>
 </div>                        </section>
@@ -387,7 +387,7 @@
                     <td class="hidden-xs hidden-sm">
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/jackpot_values_for_site">jackpot_values_for_site</a>
+            <a class="json-schema-ref" href="#/definitions/jackpot_values">jackpot_values</a>
 
     </div>
 </div></td>
@@ -462,7 +462,7 @@
                             
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/categories">categories</a>
+            <a class="json-schema-ref" href="#/definitions/preferences">preferences</a>
 
     </div>
 </div>                        </section>
@@ -470,7 +470,7 @@
                     <td class="hidden-xs hidden-sm">
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/categories">categories</a>
+            <a class="json-schema-ref" href="#/definitions/preferences">preferences</a>
 
     </div>
 </div></td>
@@ -503,7 +503,7 @@
     </div>
     <div class="panel-body">
         <section class="sw-operation-description">
-            <p>Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is &#39;true&#39;). IMPORTANT - The preferences the user does not have are not contained in the output!</p>
+            <p>Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is &#39;true&#39;). IMPORTANT - The preferences the user does not have (the ones that are &#39;false&#39;) are not contained in the output!</p>
 
         </section>
         
@@ -612,7 +612,7 @@
     </div>
     <div class="panel-body">
         <section class="sw-operation-description">
-            <p>Updates the account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is &#39;true&#39;). IMPORTANT - Only specify the preferences that apply to the user and leave out any preference that is &#39;false&#39;.</p>
+            <p>Updates the account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is &#39;true&#39;). IMPORTANT - Only specify the preferences that apply to the user (those that are &#39;true&#39;) and leave out any preference that is &#39;false&#39;.</p>
 
         </section>
             
@@ -625,7 +625,7 @@
                     <div class="col-md-6 sw-request-model">
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/categories">categories</a>
+            <a class="json-schema-ref" href="#/definitions/preferences">preferences</a>
 
     </div>
 </div></div>
@@ -765,14 +765,14 @@
                     <td>200</td>
                     <td>
                         <div class="sw-response-description-text">
-                            <p>Successful operation - user is known and returned (no need to create again)</p>
+                            <p>Successful operation - user is known and returned (no need to create again). Although the &#39;user&#39; object has room for &#39;guest&#39;, &#39;card&#39;, &#39;loyalty&#39; and &#39;preferences&#39; information, only the information contained in &#39;user_reference&#39; and &#39;pers_id&#39; will be returned.</p>
 
                         </div>
                         <section class="visible-xs visible-sm">
                             
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+            <a class="json-schema-ref" href="#/definitions/user">user</a>
 
     </div>
 </div>                        </section>
@@ -780,7 +780,7 @@
                     <td class="hidden-xs hidden-sm">
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+            <a class="json-schema-ref" href="#/definitions/user">user</a>
 
     </div>
 </div></td>
@@ -789,14 +789,14 @@
                     <td>201</td>
                     <td>
                         <div class="sw-response-description-text">
-                            <p>User created</p>
+                            <p>User created. Although the &#39;user&#39; object has room for &#39;guest&#39;, &#39;card&#39;, &#39;loyalty&#39; and &#39;preferences&#39; information, only the information contained in &#39;user_reference&#39; and &#39;pers_id&#39; will be returned.</p>
 
                         </div>
                         <section class="visible-xs visible-sm">
                             
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+            <a class="json-schema-ref" href="#/definitions/user">user</a>
 
     </div>
 </div>                        </section>
@@ -804,7 +804,7 @@
                     <td class="hidden-xs hidden-sm">
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
+            <a class="json-schema-ref" href="#/definitions/user">user</a>
 
     </div>
 </div></td>
@@ -824,10 +824,10 @@
 </td>
                 </tr>
                 <tr>
-                    <td>405</td>
+                    <td>422</td>
                     <td>
                         <div class="sw-response-description-text">
-                            <p>Invalid input</p>
+                            <p>Unprocessible entity - the request is valid, but the syntax is incorrect</p>
 
                         </div>
                         <section class="visible-xs visible-sm">
@@ -900,7 +900,7 @@
                     <td>200</td>
                     <td>
                         <div class="sw-response-description-text">
-                            <p>Successful operation</p>
+                            <p>Successful operation. Although the &#39;preferences&#39; block is available in a &#39;user&#39; object, it will not be returned in this call. You should use the &#39;all_data&#39; operation or use the &#39;preferences&#39; service.</p>
 
                         </div>
                         <section class="visible-xs visible-sm">
@@ -1019,7 +1019,7 @@
                             
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/all_user_data">all_user_data</a>
+            <a class="json-schema-ref" href="#/definitions/user">user</a>
 
     </div>
 </div>                        </section>
@@ -1027,7 +1027,7 @@
                     <td class="hidden-xs hidden-sm">
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/all_user_data">all_user_data</a>
+            <a class="json-schema-ref" href="#/definitions/user">user</a>
 
     </div>
 </div></td>
@@ -1278,6 +1278,7 @@
             <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
 </span>
 
+                    <span class="json-property-required"></span>
             </dt>
             <dd>
                 
@@ -1292,90 +1293,7 @@
 </span>
     <span class="json-property-format">(int64)</span>
 
-            </dt>
-            <dd>
-                <p>When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.</p>
-
-                <div class="json-inner-schema">
-                    
-                </div>
-            </dd>
-            <dt>
-                <span class="json-property-name">guest:</span>
-                <span class="json-property-type">
-            <a class="json-schema-ref" href="#/definitions/guest">guest</a>
-</span>
-
-            </dt>
-            <dd>
-                
-                <div class="json-inner-schema">
-                    
-                </div>
-            </dd>
-            <dt>
-                <span class="json-property-name">card:</span>
-                <span class="json-property-type">
-            <a class="json-schema-ref" href="#/definitions/card">card</a>
-</span>
-
-            </dt>
-            <dd>
-                
-                <div class="json-inner-schema">
-                    
-                </div>
-            </dd>
-            <dt>
-                <span class="json-property-name">loyalty:</span>
-                <span class="json-property-type">
-            <a class="json-schema-ref" href="#/definitions/loyalty">loyalty</a>
-</span>
-
-            </dt>
-            <dd>
-                
-                <div class="json-inner-schema">
-                    
-                </div>
-            </dd>
-    </dl>
-</section>
-
-    </div>
-</div>    
-    <div class="panel panel-definition">
-        <div class="panel-heading">
-                <h3 class="panel-title"><a name="/definitions/all_user_data"></a>all_user_data:
-                    <span class="json-property-type"><span class="json-property-type">
-        object
-</span>
-
-</span>
-                </h3>
-        </div>
-    <div class="panel-body">
-            <section class="json-schema-properties">
-    <dl>
-            <dt>
-                <span class="json-property-name">user_reference:</span>
-                <span class="json-property-type">
-            <a class="json-schema-ref" href="#/definitions/user_reference">user_reference</a>
-</span>
-
-            </dt>
-            <dd>
-                
-                <div class="json-inner-schema">
-                    
-                </div>
-            </dd>
-            <dt>
-                <span class="json-property-name">pers_id:</span>
-                <span class="json-property-type">
-        string
-</span>
-
+                    <span class="json-property-required"></span>
             </dt>
             <dd>
                 <p>When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.</p>
@@ -1424,9 +1342,9 @@
                 </div>
             </dd>
             <dt>
-                <span class="json-property-name">categories:</span>
+                <span class="json-property-name">preferences:</span>
                 <span class="json-property-type">
-            <a class="json-schema-ref" href="#/definitions/categories">categories</a>
+            <a class="json-schema-ref" href="#/definitions/preferences">preferences</a>
 </span>
 
             </dt>
@@ -1752,9 +1670,9 @@
                 </div>
             </dd>
             <dt>
-                <span class="json-property-name">categories:</span>
+                <span class="json-property-name">preferences:</span>
                 <span class="json-property-type">
-            <a class="json-schema-ref" href="#/definitions/categories">categories</a>
+            <a class="json-schema-ref" href="#/definitions/preferences">preferences</a>
 </span>
 
             </dt>
@@ -1771,7 +1689,7 @@
 </div>    
     <div class="panel panel-definition">
         <div class="panel-heading">
-                <h3 class="panel-title"><a name="/definitions/categories"></a>categories:
+                <h3 class="panel-title"><a name="/definitions/preferences"></a>preferences:
                     <span class="json-property-type"><span class="json-property-type">
         object[]
 </span>
@@ -1783,7 +1701,7 @@
         
     <section class="json-schema-array-items">
     <div class="json-inner-schema">
-            <a class="json-schema-ref" href="#/definitions/category">category</a>
+            <a class="json-schema-ref" href="#/definitions/preference">preference</a>
     <section class="json-schema-description">
         <p>A list of preferences. Examples of Categories are for instance Game, Entertainment and Locations.</p>
 
@@ -1794,7 +1712,7 @@
 </div>    
     <div class="panel panel-definition">
         <div class="panel-heading">
-                <h3 class="panel-title"><a name="/definitions/category"></a>category:
+                <h3 class="panel-title"><a name="/definitions/preference"></a>preference:
                     <span class="json-property-type"><span class="json-property-type">
         object
 </span>
@@ -1820,7 +1738,7 @@
                 </div>
             </dd>
             <dt>
-                <span class="json-property-name">preferences:</span>
+                <span class="json-property-name">values:</span>
                 <span class="json-property-type">
         string[]
 </span>
@@ -1844,7 +1762,7 @@
 </div>    
     <div class="panel panel-definition">
         <div class="panel-heading">
-                <h3 class="panel-title"><a name="/definitions/jackpot_values_for_sites"></a>jackpot_values_for_sites:
+                <h3 class="panel-title"><a name="/definitions/jackpot_values"></a>jackpot_values:
                     <span class="json-property-type"><span class="json-property-type">
         object[]
 </span>
@@ -1854,20 +1772,20 @@
         </div>
     <div class="panel-body">
             <section class="json-schema-description">
-        <p>List of all sites with all their respective jackpot values</p>
+        <p>One site or a list of sites with a list of jackpot values per site.</p>
 
     </section>
 
     <section class="json-schema-array-items">
     <div class="json-inner-schema">
-            <a class="json-schema-ref" href="#/definitions/jackpot_values_for_site">jackpot_values_for_site</a>
+            <a class="json-schema-ref" href="#/definitions/jackpot_value_for_site">jackpot_value_for_site</a>
 
     </div>
 </section>    </div>
 </div>    
     <div class="panel panel-definition">
         <div class="panel-heading">
-                <h3 class="panel-title"><a name="/definitions/jackpot_values_for_site"></a>jackpot_values_for_site:
+                <h3 class="panel-title"><a name="/definitions/jackpot_value_for_site"></a>jackpot_value_for_site:
                     <span class="json-property-type"><span class="json-property-type">
         object
 </span>
@@ -1897,7 +1815,7 @@
                 </div>
             </dd>
             <dt>
-                <span class="json-property-name">jackpot_values:</span>
+                <span class="json-property-name">values:</span>
                 <span class="json-property-type">
         object[]
 </span>
@@ -1909,7 +1827,7 @@
                     
     <section class="json-schema-array-items">
     <div class="json-inner-schema">
-            <a class="json-schema-ref" href="#/definitions/jackpot_value">jackpot_value</a>
+            <a class="json-schema-ref" href="#/definitions/value">value</a>
 
     </div>
 </section>                </div>
@@ -1921,7 +1839,7 @@
 </div>    
     <div class="panel panel-definition">
         <div class="panel-heading">
-                <h3 class="panel-title"><a name="/definitions/jackpot_value"></a>jackpot_value:
+                <h3 class="panel-title"><a name="/definitions/value"></a>value:
                     <span class="json-property-type"><span class="json-property-type">
         object
 </span>

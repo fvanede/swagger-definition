@@ -252,12 +252,15 @@ definitions:
       initials:
         type: string
         description: Initials of the user
+        maxLength: 12
       surname_prefix:
         type: string
         description: Holds the user's preposition if applicable (e.g. van, van der, von, de, 't, van 't)
+        maxLength: 8
       surname:
         type: string
         description: The user's family name or last name
+        maxLength: 80
       birth_date:
         type: string
         format: date
@@ -271,6 +274,7 @@ definitions:
       email_address:
         type: string
         description: The user's preferred E-mail address
+        maxLength: 255
       email_opt_in:
         type: boolean
         description: The user can accept e-mails from HC (true) or decline mails (false)

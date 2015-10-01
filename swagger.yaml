@@ -4,7 +4,7 @@ swagger: '2.0'
 
 # This is your document metadata
 info:
-  version: "0.3.3 - 2015-09-07"
+  version: "0.4 - 2015-10-01"
   title: HC Favorites App RESTFul web service.
   description: The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape.
 # Describe your paths here
@@ -322,9 +322,6 @@ definitions:
         type: string
         format: date
         description: The expiry date of the Favorites Card 
-      type:
-        type: string
-        description: Description of the type of card
   loyalty:
     required:
       - account_nr

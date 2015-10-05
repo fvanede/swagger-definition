@@ -6307,50 +6307,142 @@ if( requestBody.contains("some data") )
   "preferences": [
     {
       "preference": {
-        "name": "Vestigingen",
-        "values": [
-          "Amsterdam",
-          "Breda",
-          "Eindhoven",
-          "Enschede",
-          "Groningen",
-          "Leeuwarden",
-          "Nijmegen",
-          "Rotterdam",
-          "Scheveningen",
-          "Utrecht",
-          "Valkenburg",
-          "Venlo",
-          "Zandvoort"
-        ]
+        "category": "Vestigingen",
+        "description": "Amsterdam",
+        "code": "loc_amst"
       }
     },
     {
       "preference": {
-        "name": "Spelen",
-        "values": [
-          "Tafelspelen",
-          "Poker",
-          "Speelautomaten"
-        ]
+        "category": "Vestigingen",
+        "description": "Breda",
+        "code": "loc_bred"
       }
     },
     {
       "preference": {
-        "name": "Entertainment",
-        "values": [
-          "Ja",
-          "Nee"
-        ]
+        "category": "Vestigingen",
+        "description": "Eindhoven",
+        "code": "loc_eind"
       }
     },
     {
       "preference": {
-        "name": "Food &amp; Beverages",
-        "values": [
-          "Ja",
-          "Nee"
-        ]
+        "category": "Vestigingen",
+        "description": "Enschede",
+        "code": "loc_ensc"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Groningen",
+        "code": "loc_gron"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Leeuwarden",
+        "code": "loc_leeu"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Nijmegen",
+        "code": "loc_nijm"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Rotterdam",
+        "code": "loc_rott"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Scheveningen",
+        "code": "loc_sche"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Utrecht",
+        "code": "loc_utre"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Valkenburg",
+        "code": "loc_valk"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Venlo",
+        "code": "loc_venl"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Zandvoort",
+        "code": "loc_zand"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Tafelspelen",
+        "code": "gam_tasp"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Poker",
+        "code": "gam_poke"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Speelautomaten",
+        "code": "gam_spau"
+      }
+    },
+    {
+      "preference": {
+        "category": "Entertainment",
+        "description": "Ja",
+        "code": "ent_voork"
+      }
+    },
+    {
+      "preference": {
+        "category": "Entertainment",
+        "description": "Nee",
+        "code": "ent_noint"
+      }
+    },
+    {
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Ja",
+        "code": "fob_voork"
+      }
+    },
+    {
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Nee",
+        "code": "fob_noint"
       }
     }
   ]
@@ -6388,39 +6480,47 @@ if( !(requestPath.contains("231100") &amp;&amp; requestPath.contains("231101")) 
   },
   "preferences": [
       {
-        "preference": {
-          "name": "Spelen",
-          "values": [
-            "Poker",
-            "Speelautomaten"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Spelen",
+        "description": "Poker",
+        "code": "gam_poke"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Speelautomaten",
+        "code": "gam_spau"
+      }
+    },
       {
-        "preference": {
-          "name": "Vestigingen",
-          "values": [
-            "Amsterdam",
-            "Breda"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Amsterdam",
+        "code": "loc_amst"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Breda",
+        "code": "loc_bred"
+      }
+    },
       {
-        "preference": {
-          "name": "Entertainment",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Entertainment",
+        "description": "Ja",
+        "code": "ent_voork"
+      }
+    },
       {
-        "preference": {
-          "name": "Food &amp; Beverages",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Ja",
+        "code": "fob_voork"
+      }
+    }
     ]
 }</con:responseContent></con:response><con:response name="400" id="4e61a993-854c-43b5-af09-4d18f4605ef8" httpResponseStatus="400" mediaType="application/json" dataSource=""><con:settings/><con:responseContent/></con:response><con:response name="404" id="b5cddd73-0840-4744-bd6a-d1a931c7f41b" httpResponseStatus="404" mediaType="application/json" dataSource=""><con:settings/><con:responseContent/></con:response><con:response name="200 false" id="1cd4d78d-9b00-44b2-8023-b28012052045" httpResponseStatus="200" mediaType="application/json" dataSource=""><con:settings/><con:responseContent>{
   "user_reference": {
@@ -6429,39 +6529,47 @@ if( !(requestPath.contains("231100") &amp;&amp; requestPath.contains("231101")) 
   },
   "preferences": [
       {
-        "preference": {
-          "name": "Spelen",
-          "values": [
-            "Poker",
-            "Speelautomaten"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Spelen",
+        "description": "Poker",
+        "code": "gam_poke"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Speelautomaten",
+        "code": "gam_spau"
+      }
+    },
       {
-        "preference": {
-          "name": "Vestigingen",
-          "values": [
-            "Amsterdam",
-            "Breda"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Amsterdam",
+        "code": "loc_amst"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Breda",
+        "code": "loc_bred"
+      }
+    },
       {
-        "preference": {
-          "name": "Entertainment",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Entertainment",
+        "description": "Ja",
+        "code": "ent_voork"
+      }
+    },
       {
-        "preference": {
-          "name": "Food &amp; Beverages",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Ja",
+        "code": "fob_voork"
+      }
+    }
     ]
 }</con:responseContent></con:response></con:restMockAction><con:restMockAction name="/preferences/{app_id}" method="PATCH" resourcePath="/preferences/" id="174ccbd7-4823-459a-bbd7-aac31ae3be60"><con:settings/><con:defaultResponse>200</con:defaultResponse><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchConfig/><con:dispatchPath>
 // Script dispatcher is used to select a response based on the incoming request.
@@ -6596,39 +6704,47 @@ if( !(requestBody.contains("231100") || requestBody.contains("231101") || reques
     },
     "preferences": [
       {
-        "preference": {
-          "name": "Spelen",
-          "values": [
-            "Poker",
-            "Speelautomaten"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Spelen",
+        "description": "Poker",
+        "code": "gam_poke"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Speelautomaten",
+        "code": "gam_spau"
+      }
+    },
       {
-        "preference": {
-          "name": "Vestigingen",
-          "values": [
-            "Amsterdam",
-            "Breda"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Amsterdam",
+        "code": "loc_amst"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Breda",
+        "code": "loc_bred"
+      }
+    },
       {
-        "preference": {
-          "name": "Entertainment",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Entertainment",
+        "description": "Ja",
+        "code": "ent_voork"
+      }
+    },
       {
-        "preference": {
-          "name": "Food &amp; Beverages",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Ja",
+        "code": "fob_voork"
+      }
+    }
     ]
   }
 }
@@ -6661,39 +6777,47 @@ if( !(requestBody.contains("231100") || requestBody.contains("231101") || reques
     },
     "preferences": [
       {
-        "preference": {
-          "name": "Spelen",
-          "values": [
-            "Poker",
-            "Speelautomaten"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Spelen",
+        "description": "Poker",
+        "code": "gam_poke"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Speelautomaten",
+        "code": "gam_spau"
+      }
+    },
       {
-        "preference": {
-          "name": "Vestigingen",
-          "values": [
-            "Amsterdam",
-            "Breda"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Amsterdam",
+        "code": "loc_amst"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Breda",
+        "code": "loc_bred"
+      }
+    },
       {
-        "preference": {
-          "name": "Entertainment",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Entertainment",
+        "description": "Ja",
+        "code": "ent_voork"
+      }
+    },
       {
-        "preference": {
-          "name": "Food &amp; Beverages",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Ja",
+        "code": "fob_voork"
+      }
+    }
     ]
   }
 }
@@ -6726,39 +6850,47 @@ if( !(requestBody.contains("231100") || requestBody.contains("231101") || reques
     },
     "preferences": [
       {
-        "preference": {
-          "name": "Spelen",
-          "values": [
-            "Poker",
-            "Speelautomaten"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Spelen",
+        "description": "Poker",
+        "code": "gam_poke"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Speelautomaten",
+        "code": "gam_spau"
+      }
+    },
       {
-        "preference": {
-          "name": "Vestigingen",
-          "values": [
-            "Amsterdam",
-            "Breda"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Amsterdam",
+        "code": "loc_amst"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Breda",
+        "code": "loc_bred"
+      }
+    },
       {
-        "preference": {
-          "name": "Entertainment",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Entertainment",
+        "description": "Ja",
+        "code": "ent_voork"
+      }
+    },
       {
-        "preference": {
-          "name": "Food &amp; Beverages",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Ja",
+        "code": "fob_voork"
+      }
+    }
     ]
   }
 }
@@ -6791,39 +6923,47 @@ if( !(requestBody.contains("231100") || requestBody.contains("231101") || reques
     },
     "preferences": [
       {
-        "preference": {
-          "name": "Spelen",
-          "values": [
-            "Poker",
-            "Speelautomaten"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Spelen",
+        "description": "Poker",
+        "code": "gam_poke"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Speelautomaten",
+        "code": "gam_spau"
+      }
+    },
       {
-        "preference": {
-          "name": "Vestigingen",
-          "values": [
-            "Amsterdam",
-            "Breda"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Amsterdam",
+        "code": "loc_amst"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Breda",
+        "code": "loc_bred"
+      }
+    },
       {
-        "preference": {
-          "name": "Entertainment",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Entertainment",
+        "description": "Ja",
+        "code": "ent_voork"
+      }
+    },
       {
-        "preference": {
-          "name": "Food &amp; Beverages",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Ja",
+        "code": "fob_voork"
+      }
+    }
     ]
   }
 }
@@ -6890,39 +7030,47 @@ if( !(requestPath.contains("231100") &amp;&amp; requestPath.contains("231101")) 
     },
     "preferences": [
       {
-        "preference": {
-          "name": "Spelen",
-          "values": [
-            "Poker",
-            "Speelautomaten"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Spelen",
+        "description": "Poker",
+        "code": "gam_poke"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Speelautomaten",
+        "code": "gam_spau"
+      }
+    },
       {
-        "preference": {
-          "name": "Vestigingen",
-          "values": [
-            "Amsterdam",
-            "Breda"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Amsterdam",
+        "code": "loc_amst"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Breda",
+        "code": "loc_bred"
+      }
+    },
       {
-        "preference": {
-          "name": "Entertainment",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Entertainment",
+        "description": "Ja",
+        "code": "ent_voork"
+      }
+    },
       {
-        "preference": {
-          "name": "Food &amp; Beverages",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Ja",
+        "code": "fob_voork"
+      }
+    }
     ]
   }
 }
@@ -6962,39 +7110,47 @@ if( !(requestPath.contains("231100") &amp;&amp; requestPath.contains("231101")) 
     },
     "preferences": [
       {
-        "preference": {
-          "name": "Spelen",
-          "values": [
-            "Poker",
-            "Speelautomaten"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Spelen",
+        "description": "Poker",
+        "code": "gam_poke"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Speelautomaten",
+        "code": "gam_spau"
+      }
+    },
       {
-        "preference": {
-          "name": "Vestigingen",
-          "values": [
-            "Amsterdam",
-            "Breda"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Amsterdam",
+        "code": "loc_amst"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Breda",
+        "code": "loc_bred"
+      }
+    },
       {
-        "preference": {
-          "name": "Entertainment",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Entertainment",
+        "description": "Ja",
+        "code": "ent_voork"
+      }
+    },
       {
-        "preference": {
-          "name": "Food &amp; Beverages",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Ja",
+        "code": "fob_voork"
+      }
+    }
     ]
   }
 }
@@ -7060,39 +7216,47 @@ if( !(requestPath.contains("231100") &amp;&amp; requestPath.contains("231101")) 
     },
     "preferences": [
       {
-        "preference": {
-          "name": "Spelen",
-          "values": [
-            "Poker",
-            "Speelautomaten"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Spelen",
+        "description": "Poker",
+        "code": "gam_poke"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Speelautomaten",
+        "code": "gam_spau"
+      }
+    },
       {
-        "preference": {
-          "name": "Vestigingen",
-          "values": [
-            "Amsterdam",
-            "Breda"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Amsterdam",
+        "code": "loc_amst"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Breda",
+        "code": "loc_bred"
+      }
+    },
       {
-        "preference": {
-          "name": "Entertainment",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Entertainment",
+        "description": "Ja",
+        "code": "ent_voork"
+      }
+    },
       {
-        "preference": {
-          "name": "Food &amp; Beverages",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Ja",
+        "code": "fob_voork"
+      }
+    }
     ]
   }
 }
@@ -7132,39 +7296,47 @@ if( !(requestPath.contains("231100") &amp;&amp; requestPath.contains("231101")) 
     },
     "preferences": [
       {
-        "preference": {
-          "name": "Spelen",
-          "values": [
-            "Poker",
-            "Speelautomaten"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Spelen",
+        "description": "Poker",
+        "code": "gam_poke"
+      }
+    },
+    {
+      "preference": {
+        "category": "Spelen",
+        "description": "Speelautomaten",
+        "code": "gam_spau"
+      }
+    },
       {
-        "preference": {
-          "name": "Vestigingen",
-          "values": [
-            "Amsterdam",
-            "Breda"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Amsterdam",
+        "code": "loc_amst"
+      }
+    },
+    {
+      "preference": {
+        "category": "Vestigingen",
+        "description": "Breda",
+        "code": "loc_bred"
+      }
+    },
       {
-        "preference": {
-          "name": "Entertainment",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Entertainment",
+        "description": "Ja",
+        "code": "ent_voork"
+      }
+    },
       {
-        "preference": {
-          "name": "Food &amp; Beverages",
-          "values": [
-            "Ja"
-          ]
-        }
-      },
+      "preference": {
+        "category": "Food &amp; Beverages",
+        "description": "Ja",
+        "code": "fob_voork"
+      }
+    }
     ]
   }
 }

@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.4 - 2015-10-01",
+        "version": "0.4.1 - 2015-10-05",
         "title": "HC Favorites App RESTFul web service.",
         "description": "The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape."
     },
@@ -131,8 +131,8 @@
                 "tags": [
                     "preferences"
                 ],
-                "summary": "Get all possible preference values sorted by category and sub category.",
-                "description": "Get all possible preferences sorted by category and sub category. The output will be a list of type string containing all the possible values for the sub category.",
+                "summary": "Get all possible preference values",
+                "description": "Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - The preferences the user does not have (the ones that are 'false') are not contained in the output!",
                 "operationId": "RequestGetAllPossiblePreferences",
                 "produces": [
                     "application/json"
@@ -156,7 +156,7 @@
                     "preferences"
                 ],
                 "summary": "Get user preferences",
-                "description": "Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - The preferences the user does not have (the ones that are 'false') are not contained in the output!",
+                "description": "Retrieves account preferences of the the user with {app_id}. The output is a list of preference objects. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - The preferences the user does not have (the ones that are 'false') are not contained in the output!",
                 "operationId": "RequestGetFavAppPreferenceData",
                 "produces": [
                     "application/json"
@@ -190,7 +190,7 @@
                     "preferences"
                 ],
                 "summary": "Update user preferences",
-                "description": "Updates the account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - Only specify the preferences that apply to the user (those that are 'true') and leave out any preference that is 'false'.",
+                "description": "Updates the account preferences of the the user with {app_id}. A preference is an object with 3 properties: a \"category\" the preference belongs to, a \"code\" (like the key in a key/value pair) and a \"description\" (like the value of a key/value pair) list of values. If the object is present in the list, the user has this preference (it is \"true\"). IMPORTANT - Only specify the preferences that apply to the user (those that are \"true\") and leave out any preference that do not apply (those that are \"false\").",
                 "operationId": "RequestUpdateFavAppPreferenceData",
                 "produces": [
                     "application/json"
@@ -517,21 +517,25 @@
             "type": "array",
             "items": {
                 "$ref": "#/definitions/preference",
-                "description": "A list of preferences. Examples of Categories are for instance Game, Entertainment and Locations."
+                "description": "A list of preference objects. See object definition for more details"
             }
         },
         "preference": {
+            "required": [
+                "code"
+            ],
             "properties": {
-                "name": {
+                "category": {
                     "type": "string",
-                    "description": "The name of the category"
+                    "description": "The name of the category e.g. \"Spelen\" (games) and \"Vestigingen\" (locations)"
                 },
-                "values": {
-                    "description": "A list of values e.g. [blackjack, roulette] indicating the users' favorite games",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "description": {
+                    "type": "string",
+                    "description": "The preference property value e.g. \"Tafelspelen\" (table games) and \"Amsterdam\", like the \"value\" in a key/value pair."
+                },
+                "code": {
+                    "type": "string",
+                    "description": "The preference property code, like \"key\" in a key/value pair. E.g. \"gam_tasp\" as code for the game category \"Tafelpelen\". The \"code\" property is mandatory when updating the user preferences."
                 }
             }
         },

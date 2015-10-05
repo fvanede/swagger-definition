@@ -65,7 +65,7 @@
                     <a href="#operation--preferences-get">GET</a>
                 </td>
                 <td>
-                    <p>Get all possible preference values sorted by category and sub category.</p>
+                    <p>Get all possible preference values</p>
 
                 </td>
             </tr>
@@ -429,12 +429,12 @@
 <span id="path--preferences"></span>
     <div id="operation--preferences-get" class="swagger--panel-operation-get panel">
     <div class="panel-heading">
-        <div class="operation-summary">Get all possible preference values sorted by category and sub category.</div>
+        <div class="operation-summary">Get all possible preference values</div>
         <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/preferences</strong></h3>
     </div>
     <div class="panel-body">
         <section class="sw-operation-description">
-            <p>Get all possible preferences sorted by category and sub category. The output will be a list of type string containing all the possible values for the sub category.</p>
+            <p>Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is &#39;true&#39;). IMPORTANT - The preferences the user does not have (the ones that are &#39;false&#39;) are not contained in the output!</p>
 
         </section>
         
@@ -503,7 +503,7 @@
     </div>
     <div class="panel-body">
         <section class="sw-operation-description">
-            <p>Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is &#39;true&#39;). IMPORTANT - The preferences the user does not have (the ones that are &#39;false&#39;) are not contained in the output!</p>
+            <p>Retrieves account preferences of the the user with {app_id}. The output is a list of preference objects. If the value is present in the list, the user has this preference (it is &#39;true&#39;). IMPORTANT - The preferences the user does not have (the ones that are &#39;false&#39;) are not contained in the output!</p>
 
         </section>
         
@@ -612,7 +612,7 @@
     </div>
     <div class="panel-body">
         <section class="sw-operation-description">
-            <p>Updates the account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is &#39;true&#39;). IMPORTANT - Only specify the preferences that apply to the user (those that are &#39;true&#39;) and leave out any preference that is &#39;false&#39;.</p>
+            <p>Updates the account preferences of the the user with {app_id}. A preference is an object with 3 properties: a &quot;category&quot; the preference belongs to, a &quot;code&quot; (like the key in a key/value pair) and a &quot;description&quot; (like the value of a key/value pair) list of values. If the object is present in the list, the user has this preference (it is &quot;true&quot;). IMPORTANT - Only specify the preferences that apply to the user (those that are &quot;true&quot;) and leave out any preference that do not apply (those that are &quot;false&quot;).</p>
 
         </section>
             
@@ -1689,7 +1689,7 @@
     <div class="json-inner-schema">
             <a class="json-schema-ref" href="#/definitions/preference">preference</a>
     <section class="json-schema-description">
-        <p>A list of preferences. Examples of Categories are for instance Game, Entertainment and Locations.</p>
+        <p>A list of preference objects. See object definition for more details</p>
 
     </section>
 
@@ -1710,36 +1710,47 @@
             <section class="json-schema-properties">
     <dl>
             <dt>
-                <span class="json-property-name">name:</span>
+                <span class="json-property-name">category:</span>
                 <span class="json-property-type">
         string
 </span>
 
             </dt>
             <dd>
-                <p>The name of the category</p>
+                <p>The name of the category e.g. &quot;Spelen&quot; (games) and &quot;Vestigingen&quot; (locations)</p>
 
                 <div class="json-inner-schema">
                     
                 </div>
             </dd>
             <dt>
-                <span class="json-property-name">values:</span>
+                <span class="json-property-name">description:</span>
                 <span class="json-property-type">
-        string[]
+        string
 </span>
 
             </dt>
             <dd>
-                <p>A list of values e.g. [blackjack, roulette] indicating the users&#39; favorite games</p>
+                <p>The preference property value e.g. &quot;Tafelspelen&quot; (table games) and &quot;Amsterdam&quot;, like the &quot;value&quot; in a key/value pair.</p>
 
                 <div class="json-inner-schema">
                     
-    <section class="json-schema-array-items">
-    <div class="json-inner-schema">
-        
-    </div>
-</section>                </div>
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">code:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>The preference property code, like &quot;key&quot; in a key/value pair. E.g. &quot;gam_tasp&quot; as code for the game category &quot;Tafelpelen&quot;. The &quot;code&quot; property is mandatory when updating the user preferences.</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
             </dd>
     </dl>
 </section>

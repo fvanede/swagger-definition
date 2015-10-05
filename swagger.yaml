@@ -1,20 +1,15 @@
-# Holland Casino REST JSON API for Favorites App
-#
 swagger: '2.0'
-
-# This is your document metadata
 info:
-  version: "0.4 - 2015-10-01"
+  version: 0.4.1 - 2015-10-05
   title: HC Favorites App RESTFul web service.
   description: The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape.
-# Describe your paths here
 paths:
   /users:
     post:
       tags:
         - users
       summary: Register / Login
-      description: Register a new user and/or login an existing user. When the user is a Favorites Card holder the following fields are mandatory; [pers_id, guest/birthdate, guest/email_address, guest/email_opt_in]. If the users' app_id is available it may be supplied, indicating the user has registered before as an Favorites App user. If the user is not a Favorites Card user yet, the following fields are mandatory; [guest / [initials, surname, birh_date, gender, email_address, email_opt_in]]. The surname prefix (e.g. van, van de, van 't, op 't) is not mandatory. The common fields that are mandatory for both Favorites Card holders and non-Favorites Card holders are; [ birth_date, email_address, email_opt_in ].
+      description: "Register a new user and/or login an existing user. When the user is a Favorites Card holder the following fields are mandatory; [pers_id, guest/birthdate, guest/email_address, guest/email_opt_in]. If the users' app_id is available it may be supplied, indicating the user has registered before as an Favorites App user. If the user is not a Favorites Card user yet, the following fields are mandatory; [guest / [initials, surname, birh_date, gender, email_address, email_opt_in]]. The surname prefix (e.g. van, van de, van 't, op 't) is not mandatory. The common fields that are mandatory for both Favorites Card holders and non-Favorites Card holders are; [ birth_date, email_address, email_opt_in ]."
       operationId: RequestRegisterFavAppUser
       consumes:
         - application/json
@@ -26,28 +21,26 @@ paths:
           description: User object that needs to be added to the backend CRM system
           required: true
           schema:
-            $ref: "#/definitions/credentials"
+            $ref: '#/definitions/credentials'
       responses:
-        "200":
-          description: Successful operation - user is known and returned (no need to create again). Although the 'user' object has room for 'guest', 'card', 'loyalty' and 'preferences' information, only the information contained in 'user_reference' and 'pers_id' will be returned.
+        '200':
+          description: "Successful operation - user is known and returned (no need to create again). Although the 'user' object has room for 'guest', 'card', 'loyalty' and 'preferences' information, only the information contained in 'user_reference' and 'pers_id' will be returned."
           schema:
-            $ref: "#/definitions/user"
-        "201":
-          description: User created. Although the 'user' object has room for 'guest', 'card', 'loyalty' and 'preferences' information, only the information contained in 'user_reference' and 'pers_id' will be returned.
+            $ref: '#/definitions/user'
+        '201':
+          description: "User created. Although the 'user' object has room for 'guest', 'card', 'loyalty' and 'preferences' information, only the information contained in 'user_reference' and 'pers_id' will be returned."
           schema:
-            $ref: "#/definitions/user"
-        "404":
+            $ref: '#/definitions/user'
+        '404':
           description: Not found
-        "422":
-          description: Unprocessible entity - the request is valid, but the syntax is incorrect
-  # This is a path endpoint. Change it.
-  /users/{app_id}:
-    # This is a HTTP operation
+        '422':
+          description: 'Unprocessible entity - the request is valid, but the syntax is incorrect'
+  '/users/{app_id}':
     get:
       tags:
         - users
-      summary: Get user's account and loyalty data
-      description: Returns loyalty data and other account information of the user with ID {app_id}
+      summary: "Get user's account and loyalty data"
+      description: 'Returns loyalty data and other account information of the user with ID {app_id}'
       operationId: RequestFavGuestData
       produces:
         - application/json
@@ -58,21 +51,20 @@ paths:
           required: true
           type: string
       responses:
-        "200":
-          description: Successful operation. Although the 'preferences' block is available in a 'user' object, it will not be returned in this call. You should use the 'all_data' operation or use the 'preferences' service.
+        '200':
+          description: "Successful operation. Although the 'preferences' block is available in a 'user' object, it will not be returned in this call. You should use the 'all_data' operation or use the 'preferences' service."
           schema:
-            $ref: "#/definitions/user"
-        "400":
+            $ref: '#/definitions/user'
+        '400':
           description: Bad request content
-        "404":
+        '404':
           description: User not found
-  /users/{app_id}/all_data:
-    # This is a HTTP operation
+  '/users/{app_id}/all_data':
     get:
       tags:
         - users
-      summary: Get all the user's data
-      description: Get all the user's data including preferences, loyalty points, user data etc.
+      summary: "Get all the user's data"
+      description: "Get all the user's data including preferences, loyalty points, user data etc."
       operationId: RequestGetFavAppAllData
       produces:
         - application/json
@@ -84,39 +76,36 @@ paths:
           type: integer
           format: int64
       responses:
-        "200":
+        '200':
           description: Successful operation
           schema:
-            $ref: "#/definitions/user"
-        "400":
+            $ref: '#/definitions/user'
+        '400':
           description: Bad request content
-        "404":
+        '404':
           description: User not found
-          
   /preferences:
-    # This is a HTTP operation
     get:
       tags:
         - preferences
-      summary: Get all possible preference values sorted by category and sub category.
-      description: Get all possible preferences sorted by category and sub category. The output will be a list of type string containing all the possible values for the sub category.
+      summary: 'Get all possible preference values'
+      description: "Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - The preferences the user does not have (the ones that are 'false') are not contained in the output!"
       operationId: RequestGetAllPossiblePreferences
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: Successful operation
           schema:
-            $ref: "#/definitions/preferences"
-        "404":
+            $ref: '#/definitions/preferences'
+        '404':
           description: No preferences found
-  /preferences/{app_id}:
-    # This is a HTTP operation
+  '/preferences/{app_id}':
     get:
       tags:
         - preferences
       summary: Get user preferences
-      description: Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - The preferences the user does not have (the ones that are 'false') are not contained in the output!
+      description: "Retrieves account preferences of the the user with {app_id}. The output is a list of preference objects. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - The preferences the user does not have (the ones that are 'false') are not contained in the output!"
       operationId: RequestGetFavAppPreferenceData
       produces:
         - application/json
@@ -127,19 +116,19 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Successful operation
           schema:
-            $ref: "#/definitions/user_preferences"
-        "400":
+            $ref: '#/definitions/user_preferences'
+        '400':
           description: Bad request content
-        "404":
+        '404':
           description: User not found
     patch:
       tags:
         - preferences
       summary: Update user preferences
-      description: Updates the account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - Only specify the preferences that apply to the user (those that are 'true') and leave out any preference that is 'false'.
+      description: 'Updates the account preferences of the the user with {app_id}. A preference is an object with 3 properties: a "category" the preference belongs to, a "code" (like the key in a key/value pair) and a "description" (like the value of a key/value pair) list of values. If the object is present in the list, the user has this preference (it is "true"). IMPORTANT - Only specify the preferences that apply to the user (those that are "true") and leave out any preference that do not apply (those that are "false").'
       operationId: RequestUpdateFavAppPreferenceData
       produces:
         - application/json
@@ -154,17 +143,15 @@ paths:
           description: User object that needs to be added to the backend CRM system
           required: true
           schema:
-            $ref: "#/definitions/preferences"
+            $ref: '#/definitions/preferences'
       responses:
-        "200":
+        '200':
           description: Successful operation
-        "400":
+        '400':
           description: Bad request content
-        "404":
+        '404':
           description: User not found
-    
   /jackpot_values:
-    # This is a HTTP operation
     get:
       tags:
         - jackpot_values
@@ -174,45 +161,43 @@ paths:
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: Successful operation
           schema:
-            $ref: "#/definitions/jackpot_values"
-        "404":
+            $ref: '#/definitions/jackpot_values'
+        '404':
           description: Not found
-  /jackpot_values/{site_code}:
-    # This is a HTTP operation
+  '/jackpot_values/{site_code}':
     get:
       tags:
         - jackpot_values
       summary: Retrieve location JackPot values
-      description: Returns a list with one site (from {site_code} obviously. Of this site, a list of Jackpot values is returned.
+      description: 'Returns a list with one site (from {site_code} obviously. Of this site, a list of Jackpot values is returned.'
       operationId: RequestGetProgressiveJPValues(siteCode)
       produces:
         - application/json
       parameters:
         - in: path
           name: site_code
-          description: Site code of the casino 
+          description: Site code of the casino
           required: true
           type: integer
           format: int64
       responses:
-        "200":
-          description: Successful operation. Jackpot values for site {site_code} are returned.
+        '200':
+          description: 'Successful operation. Jackpot values for site {site_code} are returned.'
           schema:
-            $ref: "#/definitions/jackpot_values"
-        "400":
+            $ref: '#/definitions/jackpot_values'
+        '400':
           description: Bad request content
-        "404":
+        '404':
           description: Site code not found
-  /campaigns/{app_id}:
-    # This is a HTTP operation
+  '/campaigns/{app_id}':
     get:
       tags:
         - campaigns
       summary: Get campaigns for user
-      description: Retrieve marketing campaigns that apply to user with ID {app_id}
+      description: 'Retrieve marketing campaigns that apply to user with ID {app_id}'
       operationId: RequestGetCampaignDataByFavAppId
       produces:
         - application/json
@@ -223,13 +208,13 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Successful operation
           schema:
-            $ref: "#/definitions/campaigns"
-        "400":
+            $ref: '#/definitions/campaigns'
+        '400':
           description: Bad request content
-        "404":
+        '404':
           description: User not found
 definitions:
   credentials:
@@ -240,9 +225,9 @@ definitions:
       pers_id:
         type: integer
         format: int64
-        description: When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.
+        description: 'When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.'
       guest:
-        $ref: "#/definitions/guest"
+        $ref: '#/definitions/guest'
   guest:
     required:
       - birth_date
@@ -255,25 +240,25 @@ definitions:
         maxLength: 12
       surname_prefix:
         type: string
-        description: Holds the user's preposition if applicable (e.g. van, van der, von, de, 't, van 't)
+        description: "Holds the user's preposition if applicable (e.g. van, van der, von, de, 't, van 't)"
         maxLength: 8
       surname:
         type: string
-        description: The user's family name or last name
+        description: "The user's family name or last name"
         maxLength: 80
       birth_date:
         type: string
         format: date
-        description: The user's date of birth
+        description: "The user's date of birth"
       gender:
         type: string
-        enum: 
+        enum:
           - Male
           - Female
-        description: The user's gender 
+        description: "The user's gender"
       email_address:
         type: string
-        description: The user's preferred E-mail address
+        description: "The user's preferred E-mail address"
         maxLength: 255
       email_opt_in:
         type: boolean
@@ -284,19 +269,19 @@ definitions:
       - pers_id
     properties:
       user_reference:
-        $ref: "#/definitions/user_reference"
+        $ref: '#/definitions/user_reference'
       pers_id:
         type: integer
         format: int64
-        description: When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.        
+        description: 'When the user is registered as card holder in the HC CRM system, this ID is known. If pers_id is not known, the user is a prospect to become a Favorites Card user.'
       guest:
-        $ref: "#/definitions/guest"
+        $ref: '#/definitions/guest'
       card:
-        $ref: "#/definitions/card"
+        $ref: '#/definitions/card'
       loyalty:
-          $ref: "#/definitions/loyalty"
+        $ref: '#/definitions/loyalty'
       preferences:
-        $ref: "#/definitions/preferences"
+        $ref: '#/definitions/preferences'
         description: User preferences sorted per category
   user_reference:
     required:
@@ -321,12 +306,12 @@ definitions:
       expiry_date:
         type: string
         format: date
-        description: The expiry date of the Favorites Card 
+        description: The expiry date of the Favorites Card
   loyalty:
     required:
       - account_nr
       - points
-      - current_segment 
+      - current_segment
     properties:
       account_nr:
         type: integer
@@ -339,10 +324,10 @@ definitions:
           code:
             type: integer
             format: int32
-            description: The code of the user's current loyalty segment
+            description: "The code of the user's current loyalty segment"
           value:
             type: string
-            description: Description of the users's current loyalty segment (e.g. Black Favorites Card)
+            description: "Description of the users's current loyalty segment (e.g. Black Favorites Card)"
       next_segment:
         properties:
           code:
@@ -363,28 +348,31 @@ definitions:
   user_preferences:
     properties:
       user_reference:
-        $ref: "#/definitions/user_reference"
+        $ref: '#/definitions/user_reference'
       preferences:
-        $ref: "#/definitions/preferences"
+        $ref: '#/definitions/preferences'
   preferences:
     type: array
     items:
-      $ref: "#/definitions/preference"
-      description: A list of preferences. Examples of Categories are for instance Game, Entertainment and Locations.
+      $ref: '#/definitions/preference'
+      description: 'A list of preference objects. See object definition for more details'
   preference:
+    required:
+      - code
     properties:
-      name:
+      category:
         type: string
-        description: The name of the category
-      values:
-        description: A list of values e.g. [blackjack, roulette] indicating the users' favorite games
-        type: array
-        items:
-          type: string
+        description: 'The name of the category e.g. "Spelen" (games) and "Vestigingen" (locations)'
+      description:
+        type: string
+        description: 'The preference property value e.g. "Tafelspelen" (table games) and "Amsterdam", like the "value" in a key/value pair.'
+      code:
+        type: string
+        description: 'The preference property code, like "key" in a key/value pair. E.g. "gam_tasp" as code for the game category "Tafelpelen". The "code" property is mandatory when updating the user preferences.'
   jackpot_values:
     type: array
     items:
-      $ref: "#/definitions/jackpot_value_for_site"
+      $ref: '#/definitions/jackpot_value_for_site'
     description: One site or a list of sites with a list of jackpot values per site.
   jackpot_value_for_site:
     properties:
@@ -394,20 +382,20 @@ definitions:
       values:
         type: array
         items:
-          $ref: "#/definitions/value"
+          $ref: '#/definitions/value'
     description: List of Jackpot value objects for a particular site
   value:
     properties:
       name:
         type: string
-        description: Name of the game (e.g. ZVT IGT Poke, Hot Shot)
+        description: 'Name of the game (e.g. ZVT IGT Poke, Hot Shot)'
       levels:
         type: array
         items:
-          $ref: "#/definitions/level"
+          $ref: '#/definitions/level'
   level:
     properties:
-      name: 
+      name:
         type: string
         description: The name of the level (e.g. Level 0)
       amount:
@@ -416,11 +404,11 @@ definitions:
   campaigns:
     properties:
       user_reference:
-        $ref: "#/definitions/user_reference"
+        $ref: '#/definitions/user_reference'
       campaigns:
         type: array
         items:
-          $ref: "#/definitions/campaign"
+          $ref: '#/definitions/campaign'
   campaign:
     required:
       - code

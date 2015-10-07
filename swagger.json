@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.4.1 - 2015-10-05",
+        "version": "0.4.2 - 2015-10-07",
         "title": "HC Favorites App RESTFul web service.",
         "description": "The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape."
     },
@@ -185,7 +185,7 @@
                     }
                 }
             },
-            "patch": {
+            "put": {
                 "tags": [
                     "preferences"
                 ],

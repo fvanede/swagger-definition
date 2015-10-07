@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 0.4.1 - 2015-10-05
+  version: 0.4.2 - 2015-10-07
   title: HC Favorites App RESTFul web service.
   description: The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape.
 paths:
@@ -88,7 +88,7 @@ paths:
     get:
       tags:
         - preferences
-      summary: 'Get all possible preference values'
+      summary: Get all possible preference values
       description: "Retrieves account preferences of the the user with {app_id}. Each preference is a list of values. If the value is present in the list, the user has this preference (it is 'true'). IMPORTANT - The preferences the user does not have (the ones that are 'false') are not contained in the output!"
       operationId: RequestGetAllPossiblePreferences
       produces:
@@ -124,7 +124,7 @@ paths:
           description: Bad request content
         '404':
           description: User not found
-    patch:
+    put:
       tags:
         - preferences
       summary: Update user preferences
@@ -355,7 +355,7 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/preference'
-      description: 'A list of preference objects. See object definition for more details'
+      description: A list of preference objects. See object definition for more details
   preference:
     required:
       - code

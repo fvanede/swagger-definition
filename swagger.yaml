@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 0.4.2 - 2015-10-07
+  version: 0.5 - 2015-10-08
   title: HC Favorites App RESTFul web service.
   description: The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape.
 paths:
@@ -352,55 +352,59 @@ definitions:
       preferences:
         $ref: '#/definitions/preferences'
   preferences:
-    type: array
-    items:
-      $ref: '#/definitions/preference'
-      description: A list of preference objects. See object definition for more details
+    properties:
+      preference:
+        $ref: '#/definitions/preference'
+        description: A list of preference objects. See object definition for more details
   preference:
-    required:
-      - code
-    properties:
-      category:
-        type: string
-        description: 'The name of the category e.g. "Spelen" (games) and "Vestigingen" (locations)'
-      description:
-        type: string
-        description: 'The preference property value e.g. "Tafelspelen" (table games) and "Amsterdam", like the "value" in a key/value pair.'
-      code:
-        type: string
-        description: 'The preference property code, like "key" in a key/value pair. E.g. "gam_tasp" as code for the game category "Tafelpelen". The "code" property is mandatory when updating the user preferences.'
-  jackpot_values:
     type: array
     items:
-      $ref: '#/definitions/jackpot_value_for_site'
-    description: One site or a list of sites with a list of jackpot values per site.
+      required:
+        - code
+      properties:
+        category:
+          type: string
+          description: 'The name of the category e.g. "Spelen" (games) and "Vestigingen" (locations)'
+        description:
+         type: string
+         description: 'The preference property value e.g. "Tafelspelen" (table games) and "Amsterdam", like the "value" in a key/value pair.'
+        code:
+          type: string
+          description: 'The preference property code, like "key" in a key/value pair. E.g. "gam_tasp" as code for the game category "Tafelpelen". The "code" property is mandatory when updating the user preferences.'
+  jackpot_values:
+    properties:
+      jackpot_value_for_sites:
+        $ref: '#/definitions/jackpot_value_for_site'
+        description: One site or a list of sites with a list of jackpot values per site.
   jackpot_value_for_site:
-    properties:
-      site_code:
-        type: string
-        description: The code of the HC location (e.g. AMS for Amsterdam)
-      values:
-        type: array
-        items:
+    type: array
+    items:
+      properties:
+        site_code:
+          type: string
+          description: The code of the HC location (e.g. AMS for Amsterdam)
+        values:
           $ref: '#/definitions/value'
-    description: List of Jackpot value objects for a particular site
+          description: List of Jackpot value objects for a particular site
   value:
-    properties:
-      name:
-        type: string
-        description: 'Name of the game (e.g. ZVT IGT Poke, Hot Shot)'
-      levels:
-        type: array
-        items:
+    type: array
+    items:
+      properties:
+        name:
+          type: string
+          description: 'Name of the game (e.g. ZVT IGT Poke, Hot Shot)'
+        levels:
           $ref: '#/definitions/level'
   level:
-    properties:
-      name:
-        type: string
-        description: The name of the level (e.g. Level 0)
-      amount:
-        type: number
-        description: The value of the Progressive Jackpot
+    type: array
+    items:
+      properties:
+        name:
+          type: string
+          description: The name of the level (e.g. Level 0)
+        amount:
+          type: number
+          description: The value of the Progressive Jackpot
   campaigns:
     properties:
       user_reference:

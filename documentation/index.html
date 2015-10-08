@@ -1677,6 +1677,38 @@
         <div class="panel-heading">
                 <h3 class="panel-title"><a name="/definitions/preferences"></a>preferences:
                     <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">preference:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/preference">preference</a>
+</span>
+
+            </dt>
+            <dd>
+                <p>A list of preference objects. See object definition for more details</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/preference"></a>preference:
+                    <span class="json-property-type"><span class="json-property-type">
         object[]
 </span>
 
@@ -1687,26 +1719,6 @@
         
     <section class="json-schema-array-items">
     <div class="json-inner-schema">
-            <a class="json-schema-ref" href="#/definitions/preference">preference</a>
-    <section class="json-schema-description">
-        <p>A list of preference objects. See object definition for more details</p>
-
-    </section>
-
-    </div>
-</section>    </div>
-</div>    
-    <div class="panel panel-definition">
-        <div class="panel-heading">
-                <h3 class="panel-title"><a name="/definitions/preference"></a>preference:
-                    <span class="json-property-type"><span class="json-property-type">
-        object
-</span>
-
-</span>
-                </h3>
-        </div>
-    <div class="panel-body">
             <section class="json-schema-properties">
     <dl>
             <dt>
@@ -1756,33 +1768,11 @@
 </section>
 
     </div>
-</div>    
-    <div class="panel panel-definition">
-        <div class="panel-heading">
-                <h3 class="panel-title"><a name="/definitions/jackpot_values"></a>jackpot_values:
-                    <span class="json-property-type"><span class="json-property-type">
-        object[]
-</span>
-
-</span>
-                </h3>
-        </div>
-    <div class="panel-body">
-            <section class="json-schema-description">
-        <p>One site or a list of sites with a list of jackpot values per site.</p>
-
-    </section>
-
-    <section class="json-schema-array-items">
-    <div class="json-inner-schema">
-            <a class="json-schema-ref" href="#/definitions/jackpot_value_for_site">jackpot_value_for_site</a>
-
-    </div>
 </section>    </div>
 </div>    
     <div class="panel panel-definition">
         <div class="panel-heading">
-                <h3 class="panel-title"><a name="/definitions/jackpot_value_for_site"></a>jackpot_value_for_site:
+                <h3 class="panel-title"><a name="/definitions/jackpot_values"></a>jackpot_values:
                     <span class="json-property-type"><span class="json-property-type">
         object
 </span>
@@ -1791,11 +1781,42 @@
                 </h3>
         </div>
     <div class="panel-body">
-            <section class="json-schema-description">
-        <p>List of Jackpot value objects for a particular site</p>
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">jackpot_values:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/jackpot_value_for_site">jackpot_value_for_site</a>
+</span>
 
-    </section>
-    <section class="json-schema-properties">
+            </dt>
+            <dd>
+                <p>One site or a list of sites with a list of jackpot values per site.</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/jackpot_value_for_site"></a>jackpot_value_for_site:
+                    <span class="json-property-type"><span class="json-property-type">
+        object[]
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+            <section class="json-schema-properties">
     <dl>
             <dt>
                 <span class="json-property-name">site_code:</span>
@@ -1814,37 +1835,37 @@
             <dt>
                 <span class="json-property-name">values:</span>
                 <span class="json-property-type">
-        object[]
+            <a class="json-schema-ref" href="#/definitions/value">value</a>
 </span>
 
             </dt>
             <dd>
-                
+                <p>List of Jackpot value objects for a particular site</p>
+
                 <div class="json-inner-schema">
                     
-    <section class="json-schema-array-items">
-    <div class="json-inner-schema">
-            <a class="json-schema-ref" href="#/definitions/value">value</a>
-
-    </div>
-</section>                </div>
+                </div>
             </dd>
     </dl>
 </section>
 
     </div>
+</section>    </div>
 </div>    
     <div class="panel panel-definition">
         <div class="panel-heading">
                 <h3 class="panel-title"><a name="/definitions/value"></a>value:
                     <span class="json-property-type"><span class="json-property-type">
-        object
+        object[]
 </span>
 
 </span>
                 </h3>
         </div>
     <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
             <section class="json-schema-properties">
     <dl>
             <dt>
@@ -1864,7 +1885,7 @@
             <dt>
                 <span class="json-property-name">levels:</span>
                 <span class="json-property-type">
-        object[]
+            <a class="json-schema-ref" href="#/definitions/level">level</a>
 </span>
 
             </dt>
@@ -1872,29 +1893,28 @@
                 
                 <div class="json-inner-schema">
                     
-    <section class="json-schema-array-items">
-    <div class="json-inner-schema">
-            <a class="json-schema-ref" href="#/definitions/level">level</a>
-
-    </div>
-</section>                </div>
+                </div>
             </dd>
     </dl>
 </section>
 
     </div>
+</section>    </div>
 </div>    
     <div class="panel panel-definition">
         <div class="panel-heading">
                 <h3 class="panel-title"><a name="/definitions/level"></a>level:
                     <span class="json-property-type"><span class="json-property-type">
-        object
+        object[]
 </span>
 
 </span>
                 </h3>
         </div>
     <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
             <section class="json-schema-properties">
     <dl>
             <dt>
@@ -1929,6 +1949,7 @@
 </section>
 
     </div>
+</section>    </div>
 </div>    
     <div class="panel panel-definition">
         <div class="panel-heading">

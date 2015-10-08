@@ -373,7 +373,7 @@ definitions:
           description: 'The preference property code, like "key" in a key/value pair. E.g. "gam_tasp" as code for the game category "Tafelpelen". The "code" property is mandatory when updating the user preferences.'
   jackpot_values:
     properties:
-      jackpot_value_for_sites:
+      jackpot_values:
         $ref: '#/definitions/jackpot_value_for_site'
         description: One site or a list of sites with a list of jackpot values per site.
   jackpot_value_for_site:

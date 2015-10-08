@@ -545,7 +545,7 @@
         },
         "jackpot_values": {
             "properties": {
-                "jackpot_value_for_sites": {
+                "jackpot_values": {
                     "$ref": "#/definitions/jackpot_value_for_site",
                     "description": "One site or a list of sites with a list of jackpot values per site."
                 }

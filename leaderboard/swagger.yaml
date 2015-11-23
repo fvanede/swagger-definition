@@ -99,15 +99,19 @@ definitions:
         tournament_code:
           type: string
           description: 'Tournament code'
+          required: true
         tournament_name:
           type: string
           description: 'Name of the tournament'
+          required: true
         start_date:
           type: date
           description: 'Start date of the tournament'
+          required: true
         end_date:
           type: date
           description: 'End date of the tournament'
+          required: true
   ranking:
     type: array
     items:

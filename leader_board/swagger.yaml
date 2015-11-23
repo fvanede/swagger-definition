@@ -1,0 +1,130 @@
+swagger: '2.0'
+info:
+  version: 0.1 - 2015-11-23
+  title: HC Player ranking RESTFul web service.
+  description: The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape.
+paths:
+  /tournaments:
+    get:
+      tags:
+        - leaderboard
+      summary: "Get list of available tournaments"
+      description: 'Returns list of tournaments for which the end date is not reached yet, or all tournaments when the optional "archived" parameter is set to "true"'
+      operationId: GetTournaments
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: archived
+          description: 'When "true": also show tournaments from the past (end_date < today())'
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: "Successful operation."
+          schema:
+            $ref: '#/definitions/tournament'
+        '400':
+          description: 'Bad request content'
+        '404':
+          description: 'Tournament not found'
+  /leaderboard:
+    get:
+      tags:
+        - leaderboard
+      summary: "Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players."
+      description: "Returns list of ALL available tournaments - also those that were held in the past and which are archived."
+      operationId: GetLeaderboardForTournamentCode
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: tournament_code
+          description: ''
+          required: true
+          type: string
+        - in: body
+          name: min_offset
+          description: 'Start offset (inclusive), when a part of the list is wanted. The default start offset is 0.'
+          required: false
+          type: integer
+        - in: body
+          name: max_offset
+          description: 'End offset (exclusive). Example: when the start offset is 0 and the end offset is 15, then the records 0-14 are returned.'
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: "Successful operation."
+          schema:
+            $ref: '#/definitions/ranking'
+        '400':
+          description: 'Bad request content'
+        '404':
+          description: 'Tournament or ranking not found'
+  /player:
+    get:
+      tags:
+        - leaderboard
+      summary: "Find player ranking in a specific tournament"
+      description: "Returns list of ALL available tournaments - also those that were held in the past and which are archived."
+      operationId: GetLeaderboardForTournamentCode
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: tournament_code
+          description: ''
+          required: true
+          type: string
+        - in: query
+          name: player
+          description: 'User name of the player'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: "Successful operation."
+          schema:
+            $ref: '#/definitions/ranking'
+        '400':
+          description: 'Bad request content'
+        '404':
+          description: 'Player or tournament not found'
+definitions:
+  tournament:
+    type: array
+    items:
+      properties:
+        tournament_code:
+          type: string
+          description: 'Tournament code'
+        tournament_name:
+          type: string
+          description: 'Name of the tournament'
+        start_date:
+          type: date
+          description: 'Start date of the tournament'
+        end_date:
+          type: date
+          description: 'End date of the tournament'
+  ranking:
+    type: array
+    items:
+      properties:
+        player:
+          type: string
+          description: 'Name of the player'
+          required: false
+        points:
+          type: string
+          description: "The player's score"
+          required: true
+        position:
+          type: integer
+          description: "The player's position in the ranking"
+          required: true
+          
+
+        
+

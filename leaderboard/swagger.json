@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.1 - 2015-11-23",
+        "version": "0.2 - 2015-11-24",
         "title": "HC Player ranking RESTFul web service.",
         "description": "The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape."
     },
@@ -59,7 +59,7 @@
                         "name": "tournament_code",
                         "description": "",
                         "required": true,
-                        "type": "string"
+                        "type": "integer"
                     },
                     {
                         "in": "body",
@@ -107,9 +107,9 @@
                     {
                         "in": "query",
                         "name": "tournament_code",
-                        "description": "",
+                        "description": "Unique integer key for a tournament",
                         "required": true,
-                        "type": "string"
+                        "type": "integer"
                     },
                     {
                         "in": "query",
@@ -142,7 +142,7 @@
             "items": {
                 "properties": {
                     "tournament_code": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Tournament code",
                         "required": true
                     },
@@ -170,7 +170,7 @@
                 "properties": {
                     "player": {
                         "type": "string",
-                        "description": "Name of the player",
+                        "description": "The player's name",
                         "required": false
                     },
                     "points": {

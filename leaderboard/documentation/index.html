@@ -23,10 +23,10 @@
     <tbody>
             <tr>
                     <td class="swagger--summary-path" rowspan="1">
-                        <a href="#path--leaderboard">/leaderboard</a>
+                        <a href="#path--tournament--tournament_code--ranking">/tournament/{tournament_code}/ranking</a>
                     </td>
                 <td>
-                    <a href="#operation--leaderboard-get">GET</a>
+                    <a href="#operation--tournament--tournament_code--ranking-get">GET</a>
                 </td>
                 <td>
                     <p>Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players.</p>
@@ -35,10 +35,10 @@
             </tr>
             <tr>
                     <td class="swagger--summary-path" rowspan="1">
-                        <a href="#path--player">/player</a>
+                        <a href="#path--tournament--tournament_code--ranking--player-">/tournament/{tournament_code}/ranking/{player}</a>
                     </td>
                 <td>
-                    <a href="#operation--player-get">GET</a>
+                    <a href="#operation--tournament--tournament_code--ranking--player--get">GET</a>
                 </td>
                 <td>
                     <p>Find player ranking in a specific tournament</p>
@@ -65,11 +65,11 @@
 <h2>Paths</h2>
 
     
-<span id="path--leaderboard"></span>
-    <div id="operation--leaderboard-get" class="swagger--panel-operation-get panel">
+<span id="path--tournament--tournament_code--ranking"></span>
+    <div id="operation--tournament--tournament_code--ranking-get" class="swagger--panel-operation-get panel">
     <div class="panel-heading">
         <div class="operation-summary">Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players.</div>
-        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/leaderboard</strong></h3>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/tournament/{tournament_code}/ranking</strong></h3>
     </div>
     <div class="panel-body">
         <section class="sw-operation-description">
@@ -103,8 +103,9 @@
                     <td>tournament_code
                             <span class="json-property-required"></span>
                         </td>
-                    <td></td>
-                    <td>query</td>
+                    <td><p>Tournament code to get ranking of</p>
+</td>
+                    <td>path</td>
                     <td>
                         <span class="json-property-type">
         integer
@@ -186,11 +187,11 @@
 
             </div>
 </div>    
-<span id="path--player"></span>
-    <div id="operation--player-get" class="swagger--panel-operation-get panel">
+<span id="path--tournament--tournament_code--ranking--player-"></span>
+    <div id="operation--tournament--tournament_code--ranking--player--get" class="swagger--panel-operation-get panel">
     <div class="panel-heading">
         <div class="operation-summary">Find player ranking in a specific tournament</div>
-        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/player</strong></h3>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/tournament/{tournament_code}/ranking/{player}</strong></h3>
     </div>
     <div class="panel-body">
         <section class="sw-operation-description">
@@ -215,7 +216,7 @@
                         </td>
                     <td><p>Unique integer key for a tournament</p>
 </td>
-                    <td>query</td>
+                    <td>path</td>
                     <td>
                         <span class="json-property-type">
         integer
@@ -229,7 +230,7 @@
                         </td>
                     <td><p>User name of the player</p>
 </td>
-                    <td>query</td>
+                    <td>path</td>
                     <td>
                         <span class="json-property-type">
         string
@@ -405,7 +406,7 @@
                     <td>404</td>
                     <td>
                         <div class="sw-response-description-text">
-                            <p>Tournament not found</p>
+                            <p>No tournaments found</p>
 
                         </div>
                         <section class="visible-xs visible-sm">

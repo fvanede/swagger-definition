@@ -1,13 +1,13 @@
 swagger: '2.0'
 info:
-  version: 0.2 - 2015-11-24
+  version: 0.3 - 2015-11-26
   title: HC Player ranking RESTFul web service.
   description: The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape.
 paths:
   /tournaments:
     get:
       tags:
-        - leaderboard
+        - tournaments
       summary: "Get list of available tournaments"
       description: 'Returns list of tournaments for which the end date is not reached yet, or all tournaments when the optional "archived" parameter is set to "true"'
       operationId: GetTournaments
@@ -27,20 +27,20 @@ paths:
         '400':
           description: "Bad request content"
         '404':
-          description: "Tournament not found"
-  /leaderboard:
+          description: "No tournaments found"
+  '/tournament/{tournament_code}/ranking':
     get:
       tags:
-        - leaderboard
+        - ranking
       summary: "Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players."
       description: "Returns list of ALL available tournaments - also those that were held in the past and which are archived."
       operationId: GetLeaderboardForTournamentCode
       produces:
         - application/json
       parameters:
-        - in: query
+        - in: path
           name: tournament_code
-          description: ''
+          description: 'Tournament code to get ranking of'
           required: true
           type: integer
         - in: body
@@ -62,22 +62,22 @@ paths:
           description: "Bad request content"
         '404':
           description: "Tournament or ranking not found"
-  /player:
+  /tournament/{tournament_code}/ranking/{player}:
     get:
       tags:
-        - leaderboard
+        - ranking
       summary: "Find player ranking in a specific tournament"
       description: "Returns list of ALL available tournaments - also those that were held in the past and which are archived."
-      operationId: GetLeaderboardForTournamentCode
+      operationId: SearchRanking
       produces:
         - application/json
       parameters:
-        - in: query
+        - in: path
           name: tournament_code
           description: "Unique integer key for a tournament"
           required: true
           type: integer
-        - in: query
+        - in: path
           name: player
           description: "User name of the player"
           required: true

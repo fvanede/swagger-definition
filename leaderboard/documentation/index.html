@@ -23,10 +23,22 @@
     <tbody>
             <tr>
                     <td class="swagger--summary-path" rowspan="1">
-                        <a href="#path--tournament--tournament_code--ranking">/tournament/{tournament_code}/ranking</a>
+                        <a href="#path--tournaments">/tournaments</a>
                     </td>
                 <td>
-                    <a href="#operation--tournament--tournament_code--ranking-get">GET</a>
+                    <a href="#operation--tournaments-get">GET</a>
+                </td>
+                <td>
+                    <p>Get list of available tournaments</p>
+
+                </td>
+            </tr>
+            <tr>
+                    <td class="swagger--summary-path" rowspan="1">
+                        <a href="#path--tournaments--tournament_code--ranking">/tournaments/{tournament_code}/ranking</a>
+                    </td>
+                <td>
+                    <a href="#operation--tournaments--tournament_code--ranking-get">GET</a>
                 </td>
                 <td>
                     <p>Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players.</p>
@@ -35,25 +47,13 @@
             </tr>
             <tr>
                     <td class="swagger--summary-path" rowspan="1">
-                        <a href="#path--tournament--tournament_code--ranking--player-">/tournament/{tournament_code}/ranking/{player}</a>
+                        <a href="#path--tournaments--tournament_code--ranking--player-">/tournaments/{tournament_code}/ranking/{player}</a>
                     </td>
                 <td>
-                    <a href="#operation--tournament--tournament_code--ranking--player--get">GET</a>
+                    <a href="#operation--tournaments--tournament_code--ranking--player--get">GET</a>
                 </td>
                 <td>
                     <p>Find player ranking in a specific tournament</p>
-
-                </td>
-            </tr>
-            <tr>
-                    <td class="swagger--summary-path" rowspan="1">
-                        <a href="#path--tournaments">/tournaments</a>
-                    </td>
-                <td>
-                    <a href="#operation--tournaments-get">GET</a>
-                </td>
-                <td>
-                    <p>Get list of available tournaments</p>
 
                 </td>
             </tr>
@@ -65,29 +65,128 @@
 <h2>Paths</h2>
 
     
-<span id="path--tournament--tournament_code--ranking"></span>
-    <div id="operation--tournament--tournament_code--ranking-get" class="swagger--panel-operation-get panel">
+<span id="path--tournaments"></span>
+    <div id="operation--tournaments-get" class="swagger--panel-operation-get panel">
+    <div class="panel-heading">
+        <div class="operation-summary">Get list of available tournaments</div>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/tournaments</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-operation-description">
+            <p>Returns list of tournaments for which the end date is not reached yet, or all tournaments when the optional &quot;archived&quot; parameter is set to &quot;true&quot;</p>
+
+        </section>
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>archived
+</td>
+                    <td><p>When &quot;true&quot;: also show tournaments from the past (end_date &lt; today())</p>
+</td>
+                    <td>query</td>
+                    <td>
+                        <span class="json-property-type">
+        boolean
+</span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p><span class="label label-default">application/json</span> </p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Successful operation.</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/tournament">tournament</a>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/tournament">tournament</a>
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>204</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>No tournaments found</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Bad request content</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+<span id="path--tournaments--tournament_code--ranking"></span>
+    <div id="operation--tournaments--tournament_code--ranking-get" class="swagger--panel-operation-get panel">
     <div class="panel-heading">
         <div class="operation-summary">Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players.</div>
-        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/tournament/{tournament_code}/ranking</strong></h3>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/tournaments/{tournament_code}/ranking</strong></h3>
     </div>
     <div class="panel-body">
         <section class="sw-operation-description">
             <p>Returns list of ALL available tournaments - also those that were held in the past and which are archived.</p>
 
         </section>
-            
-    <section class="sw-request-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p><p><strong>min_offset</strong>: Start offset (inclusive), when a part of the list is wanted. The default start offset is 0.</p>
-                        <p><p><strong>end_offset</strong>: End offset (exclusive). Example: when the start offset is 0 and the end offset is 15, then the records 0-14 are returned.</p>
-</p>
-                    </div>
-                    <div class="col-md-6 sw-request-model">
-</div>
-                </div>
-    </section>        
+        
     <section class="sw-request-params">
         <table class="table">
             <thead>
@@ -106,6 +205,32 @@
                     <td><p>Tournament code to get ranking of</p>
 </td>
                     <td>path</td>
+                    <td>
+                        <span class="json-property-type">
+        integer
+</span>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>min_offset
+</td>
+                    <td><p>Start offset (inclusive), when a part of the list is wanted. The default start offset is 0.</p>
+</td>
+                    <td>query</td>
+                    <td>
+                        <span class="json-property-type">
+        integer
+</span>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>max_offset
+</td>
+                    <td><p>End offset (exclusive). Example: when the start offset is 0 and the end offset is 15, then the records 0-14 are returned.</p>
+</td>
+                    <td>query</td>
                     <td>
                         <span class="json-property-type">
         integer
@@ -187,11 +312,11 @@
 
             </div>
 </div>    
-<span id="path--tournament--tournament_code--ranking--player-"></span>
-    <div id="operation--tournament--tournament_code--ranking--player--get" class="swagger--panel-operation-get panel">
+<span id="path--tournaments--tournament_code--ranking--player-"></span>
+    <div id="operation--tournaments--tournament_code--ranking--player--get" class="swagger--panel-operation-get panel">
     <div class="panel-heading">
         <div class="operation-summary">Find player ranking in a specific tournament</div>
-        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/tournament/{tournament_code}/ranking/{player}</strong></h3>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/tournaments/{tournament_code}/ranking/{player}</strong></h3>
     </div>
     <div class="panel-body">
         <section class="sw-operation-description">
@@ -297,116 +422,6 @@
                     <td>
                         <div class="sw-response-description-text">
                             <p>Player or tournament not found</p>
-
-                        </div>
-                        <section class="visible-xs visible-sm">
-                            
-                        </section>
-                    </td>
-                    <td class="hidden-xs hidden-sm">
-</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-            </div>
-</div>    
-<span id="path--tournaments"></span>
-    <div id="operation--tournaments-get" class="swagger--panel-operation-get panel">
-    <div class="panel-heading">
-        <div class="operation-summary">Get list of available tournaments</div>
-        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/tournaments</strong></h3>
-    </div>
-    <div class="panel-body">
-        <section class="sw-operation-description">
-            <p>Returns list of tournaments for which the end date is not reached yet, or all tournaments when the optional &quot;archived&quot; parameter is set to &quot;true&quot;</p>
-
-        </section>
-        
-    <section class="sw-request-params">
-        <table class="table">
-            <thead>
-            <tr>
-                <th class="sw-param-name"></th>
-                <th class="sw-param-description"></th>
-                <th class="sw-param-type"></th>
-                <th class="sw-param-data-type"></th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>archived
-</td>
-                    <td><p>When &quot;true&quot;: also show tournaments from the past (end_date &lt; today())</p>
-</td>
-                    <td>query</td>
-                    <td>
-                        <span class="json-property-type">
-        boolean
-</span>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-        
-    <section class="sw-response-body">
-        <p><span class="label label-default">application/json</span> </p>
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th class="sw-response-code"></th>
-                <th class="sw-response-description"></th>
-                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>200</td>
-                    <td>
-                        <div class="sw-response-description-text">
-                            <p>Successful operation.</p>
-
-                        </div>
-                        <section class="visible-xs visible-sm">
-                            
-    <div class="panel panel-definition">
-    <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/tournament">tournament</a>
-
-    </div>
-</div>                        </section>
-                    </td>
-                    <td class="hidden-xs hidden-sm">
-    <div class="panel panel-definition">
-    <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/tournament">tournament</a>
-
-    </div>
-</div></td>
-                </tr>
-                <tr>
-                    <td>400</td>
-                    <td>
-                        <div class="sw-response-description-text">
-                            <p>Bad request content</p>
-
-                        </div>
-                        <section class="visible-xs visible-sm">
-                            
-                        </section>
-                    </td>
-                    <td class="hidden-xs hidden-sm">
-</td>
-                </tr>
-                <tr>
-                    <td>404</td>
-                    <td>
-                        <div class="sw-response-description-text">
-                            <p>No tournaments found</p>
 
                         </div>
                         <section class="visible-xs visible-sm">

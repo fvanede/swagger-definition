@@ -24,11 +24,11 @@ paths:
           description: "Successful operation."
           schema:
             $ref: "#/definitions/tournament"
+        '204':
+          description: "No tournaments found"
         '400':
           description: "Bad request content"
-        '404':
-          description: "No tournaments found"
-  '/tournament/{tournament_code}/ranking':
+  '/tournaments/{tournament_code}/ranking':
     get:
       tags:
         - ranking
@@ -43,12 +43,12 @@ paths:
           description: 'Tournament code to get ranking of'
           required: true
           type: integer
-        - in: body
+        - in: query
           name: min_offset
           description: "Start offset (inclusive), when a part of the list is wanted. The default start offset is 0."
           required: false
           type: integer
-        - in: body
+        - in: query
           name: max_offset
           description: "End offset (exclusive). Example: when the start offset is 0 and the end offset is 15, then the records 0-14 are returned."
           required: false
@@ -62,7 +62,7 @@ paths:
           description: "Bad request content"
         '404':
           description: "Tournament or ranking not found"
-  /tournament/{tournament_code}/ranking/{player}:
+  /tournaments/{tournament_code}/ranking/{player}:
     get:
       tags:
         - ranking

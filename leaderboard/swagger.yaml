@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 0.3 - 2015-11-26
+  version: 0.4 - 2015-12-01
   title: HC Player ranking RESTFul web service.
   description: The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape.
 paths:
@@ -8,7 +8,7 @@ paths:
     get:
       tags:
         - tournaments
-      summary: "Get list of available tournaments"
+      summary: Get list of available tournaments
       description: 'Returns list of tournaments for which the end date is not reached yet, or all tournaments when the optional "archived" parameter is set to "true"'
       operationId: GetTournaments
       produces:
@@ -21,76 +21,76 @@ paths:
           type: boolean
       responses:
         '200':
-          description: "Successful operation."
+          description: Successful operation.
           schema:
-            $ref: "#/definitions/tournament"
-        '204':
-          description: "No tournaments found"
+            $ref: '#/definitions/tournament'
         '400':
-          description: "Bad request content"
+          description: Bad request content
+        '404':
+          description: No tournaments found
   '/tournaments/{tournament_code}/ranking':
     get:
       tags:
         - ranking
-      summary: "Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players."
-      description: "Returns list of ALL available tournaments - also those that were held in the past and which are archived."
+      summary: Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players.
+      description: Returns list of ALL available tournaments - also those that were held in the past and which are archived.
       operationId: GetLeaderboardForTournamentCode
       produces:
         - application/json
       parameters:
         - in: path
           name: tournament_code
-          description: 'Tournament code to get ranking of'
+          description: Tournament code to get ranking of
           required: true
           type: integer
         - in: query
           name: min_offset
-          description: "Start offset (inclusive), when a part of the list is wanted. The default start offset is 0."
+          description: 'Start offset (inclusive), when a part of the list is wanted. The default start offset is 0.'
           required: false
           type: integer
         - in: query
           name: max_offset
-          description: "End offset (exclusive). Example: when the start offset is 0 and the end offset is 15, then the records 0-14 are returned."
+          description: 'End offset (exclusive). Example: when the start offset is 0 and the end offset is 15, then the records 0-14 are returned.'
           required: false
           type: integer
       responses:
         '200':
-          description: "Successful operation."
+          description: Successful operation.
           schema:
-            $ref: '#/definitions/ranking'
+            $ref: '#/definitions/tournament'
         '400':
-          description: "Bad request content"
+          description: Bad request content
         '404':
-          description: "Tournament or ranking not found"
-  /tournaments/{tournament_code}/ranking/{player}:
+          description: Tournament or ranking not found
+  '/tournaments/{tournament_code}/ranking/{player}':
     get:
       tags:
         - ranking
-      summary: "Find player ranking in a specific tournament"
-      description: "Returns list of ALL available tournaments - also those that were held in the past and which are archived."
+      summary: Find player ranking in a specific tournament
+      description: Returns list of ALL available tournaments - also those that were held in the past and which are archived.
       operationId: SearchRanking
       produces:
         - application/json
       parameters:
         - in: path
           name: tournament_code
-          description: "Unique integer key for a tournament"
+          description: Unique integer key for a tournament
           required: true
           type: integer
         - in: path
           name: player
-          description: "User name of the player"
+          description: User name of the player
           required: true
           type: string
       responses:
         '200':
-          description: "Successful operation."
+          description: Successful operation.
           schema:
-            $ref: "#/definitions/ranking"
+            $ref: '#/definitions/tournament'
         '400':
-          description: "Bad request content"
+          description: Bad request content
         '404':
-          description: "Player or tournament not found"
+          description: Player or tournament not found
 definitions:
   tournament:
     type: array
@@ -98,37 +98,35 @@ definitions:
       properties:
         tournament_code:
           type: integer
-          description: "Tournament code"
+          description: Tournament code
           required: true
         tournament_name:
           type: string
-          description: "Name of the tournament"
-          required: true
+          description: Name of the tournament
+          required: false
         start_date:
           type: date
-          description: "Start date of the tournament"
-          required: true
+          description: Start date of the tournament
+          required: false
         end_date:
           type: date
-          description: "End date of the tournament"
-          required: true
-  ranking:
-    type: array
-    items:
-      properties:
-        player:
-          type: string
-          description: "The player's name"
+          description: End date of the tournament
           required: false
-        points:
-          type: string
-          description: "The player's score"
-          required: true
-        position:
-          type: integer
-          description: "The player's position in the ranking"
-          required: true
-          
-
-        
-
+        ranking:
+          type: array
+          description: Ranking of the tournament
+          minItems: 0
+          items:
+            properties:
+              player:
+                type: string
+                description: "The player's name"
+                required: true
+              points:
+                type: string
+                description: "The player's score"
+                required: true
+              position:
+                type: integer
+                description: "The player's position in the ranking"
+                required: true

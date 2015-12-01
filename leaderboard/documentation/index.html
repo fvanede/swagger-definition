@@ -142,10 +142,10 @@
 </div></td>
                 </tr>
                 <tr>
-                    <td>204</td>
+                    <td>400</td>
                     <td>
                         <div class="sw-response-description-text">
-                            <p>No tournaments found</p>
+                            <p>Bad request content</p>
 
                         </div>
                         <section class="visible-xs visible-sm">
@@ -156,10 +156,10 @@
 </td>
                 </tr>
                 <tr>
-                    <td>400</td>
+                    <td>404</td>
                     <td>
                         <div class="sw-response-description-text">
-                            <p>Bad request content</p>
+                            <p>No tournaments found</p>
 
                         </div>
                         <section class="visible-xs visible-sm">
@@ -265,7 +265,7 @@
                             
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/ranking">ranking</a>
+            <a class="json-schema-ref" href="#/definitions/tournament">tournament</a>
 
     </div>
 </div>                        </section>
@@ -273,7 +273,7 @@
                     <td class="hidden-xs hidden-sm">
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/ranking">ranking</a>
+            <a class="json-schema-ref" href="#/definitions/tournament">tournament</a>
 
     </div>
 </div></td>
@@ -390,7 +390,7 @@
                             
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/ranking">ranking</a>
+            <a class="json-schema-ref" href="#/definitions/tournament">tournament</a>
 
     </div>
 </div>                        </section>
@@ -398,7 +398,7 @@
                     <td class="hidden-xs hidden-sm">
     <div class="panel panel-definition">
     <div class="panel-body">
-            <a class="json-schema-ref" href="#/definitions/ranking">ranking</a>
+            <a class="json-schema-ref" href="#/definitions/tournament">tournament</a>
 
     </div>
 </div></td>
@@ -513,24 +513,18 @@
                     
                 </div>
             </dd>
-    </dl>
-</section>
-
-    </div>
-</section>    </div>
-</div>    
-    <div class="panel panel-definition">
-        <div class="panel-heading">
-                <h3 class="panel-title"><a name="/definitions/ranking"></a>ranking:
-                    <span class="json-property-type"><span class="json-property-type">
+            <dt>
+                <span class="json-property-name">ranking:</span>
+                <span class="json-property-type">
         object[]
 </span>
 
-</span>
-                </h3>
-        </div>
-    <div class="panel-body">
-        
+            </dt>
+            <dd>
+                <p>Ranking of the tournament</p>
+
+                <div class="json-inner-schema">
+                    
     <section class="json-schema-array-items">
     <div class="json-inner-schema">
             <section class="json-schema-properties">
@@ -576,6 +570,12 @@
                 <div class="json-inner-schema">
                     
                 </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</section>                </div>
             </dd>
     </dl>
 </section>

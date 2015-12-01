@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.3 - 2015-11-26",
+        "version": "0.4 - 2015-12-01",
         "title": "HC Player ranking RESTFul web service.",
         "description": "The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape."
     },
@@ -33,11 +33,11 @@
                             "$ref": "#/definitions/tournament"
                         }
                     },
-                    "204": {
-                        "description": "No tournaments found"
-                    },
                     "400": {
                         "description": "Bad request content"
+                    },
+                    "404": {
+                        "description": "No tournaments found"
                     }
                 }
             }
@@ -80,7 +80,7 @@
                     "200": {
                         "description": "Successful operation.",
                         "schema": {
-                            "$ref": "#/definitions/ranking"
+                            "$ref": "#/definitions/tournament"
                         }
                     },
                     "400": {
@@ -123,7 +123,7 @@
                     "200": {
                         "description": "Successful operation.",
                         "schema": {
-                            "$ref": "#/definitions/ranking"
+                            "$ref": "#/definitions/tournament"
                         }
                     },
                     "400": {
@@ -149,39 +149,41 @@
                     "tournament_name": {
                         "type": "string",
                         "description": "Name of the tournament",
-                        "required": true
+                        "required": false
                     },
                     "start_date": {
                         "type": "date",
                         "description": "Start date of the tournament",
-                        "required": true
+                        "required": false
                     },
                     "end_date": {
                         "type": "date",
                         "description": "End date of the tournament",
-                        "required": true
-                    }
-                }
-            }
-        },
-        "ranking": {
-            "type": "array",
-            "items": {
-                "properties": {
-                    "player": {
-                        "type": "string",
-                        "description": "The player's name",
                         "required": false
                     },
-                    "points": {
-                        "type": "string",
-                        "description": "The player's score",
-                        "required": true
-                    },
-                    "position": {
-                        "type": "integer",
-                        "description": "The player's position in the ranking",
-                        "required": true
+                    "ranking": {
+                        "type": "array",
+                        "description": "Ranking of the tournament",
+                        "minItems": 0,
+                        "items": {
+                            "properties": {
+                                "player": {
+                                    "type": "string",
+                                    "description": "The player's name",
+                                    "required": true
+                                },
+                                "points": {
+                                    "type": "string",
+                                    "description": "The player's score",
+                                    "required": true
+                                },
+                                "position": {
+                                    "type": "integer",
+                                    "description": "The player's position in the ranking",
+                                    "required": true
+                                }
+                            }
+                        }
                     }
                 }
             }

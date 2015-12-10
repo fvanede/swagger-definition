@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <title>Retrieve player data of logged in users</title>
+</head>
+<body>
+<div class="container">
+    <h1>Retrieve player data of logged in users</h1>
+<p><p>The player data web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural     problem within the HC backend server landscape.</p>
+</p>
+
+<h2>Summary</h2>
+<table class="table table-bordered table-condensed swagger--summary">
+    <thead>
+    <tr>
+        <th>Path</th>
+        <th>Operation</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+                    <td class="swagger--summary-path" rowspan="1">
+                        <a href="#path--players--username-">/players/{username}</a>
+                    </td>
+                <td>
+                    <a href="#operation--players--username--post">POST</a>
+                </td>
+                <td>
+                    <p>Get player data</p>
+
+                </td>
+            </tr>
+    </tbody>
+</table>
+
+
+    <h2>Security</h2>
+
+        <div id="security-definition-token" class="panel panel-security-definition panel-security-definition-apiKey">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="security-name">token</span> <strong><span class="sw-security-definition-apiKey"></span></strong></h3>
+            </div>
+            <div class="panel-body">
+                <section class="sw-security-properties">
+                        <dt>
+                                <span class="security-property-name">name:</span>
+                                <span class="security-property-type">Auth-Token</span>
+                        </dt>
+                        <dt>
+                        </dt>
+                        <dt>
+                                <span class="security-property-name">in:</span>
+                                <span class="security-property-type">header</span>
+                        </dt>
+                        <dt>
+                                <span class="security-property-name">description:</span>
+                                <span class="security-property-type">User token obtained from PlayTech</span>
+                        </dt>
+                </section>
+            </div>
+        </div>
+
+<h2>Paths</h2>
+
+    
+<span id="path--players--username-"></span>
+    <div id="operation--players--username--post" class="swagger--panel-operation-post panel">
+    <div class="panel-heading">
+        <div class="operation-summary">Get player data</div>
+        <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/players/{username}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-operation-description">
+            <p>Get data for the player with the given username. Service will check the validity of the combination of username and token. If valid, it will retrieve the user data. Returns an array of a single <code>Players</code> object.</p>
+
+        </section>
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Auth-Casino-Id
+                            <span class="json-property-required"></span>
+                        </td>
+                    <td><p>Unique id of the casino the player is logged in to</p>
+</td>
+                    <td>header</td>
+                    <td>
+                        <span class="json-property-type">
+        string
+</span>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>username
+                            <span class="json-property-required"></span>
+                        </td>
+                    <td><p>Unique username</p>
+</td>
+                    <td>path</td>
+                    <td>
+                        <span class="json-property-type">
+        string
+</span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>OK - Player data found. Returns an array of a single <code>Players</code> object.</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/players">players</a>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    <div class="panel panel-definition">
+    <div class="panel-body">
+            <a class="json-schema-ref" href="#/definitions/players">players</a>
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>401</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Unauthorized - Invalid or no token.</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            <p>Not Found - No data found for specified username.</p>
+
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            <section class="sw-request-security">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-request-security-schema"></th>
+                <th class="sw-request-security-scopes"></th>
+            </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td><a href="#security-definition-token">token</a></td>
+                        <td>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </section>
+    </div>
+</div>
+
+<h2>Definitions</h2>
+
+    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/players"></a>players:
+                    <span class="json-property-type"><span class="json-property-type">
+        object[]
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">username:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Unique username</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</section>    </div>
+</div></div>
+</body>
+</html>

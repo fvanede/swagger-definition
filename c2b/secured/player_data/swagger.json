@@ -1,0 +1,230 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0 - 2015-15-10",
+        "title": "Retrieve player data of users who logged into the PlayTech (PT) portal",
+        "description": "The player data web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape."
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/players/{username}": {
+            "get": {
+                "tags": [
+                    "players"
+                ],
+                "summary": "Get player data of player logged into PT portal",
+                "description": "Get data for the player with the given PT username. Service will check the validity of the combination of username and token. If valid, it will retrieve the user data. Returns an array of a single `Players` object.",
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Auth-Casino-Id",
+                        "description": "Unique id of the casino the player is logged in to.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "username",
+                        "description": "Unique username",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "address",
+                        "description": "Determines whether the address information of the player should be returned. Default `true`",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "true",
+                            "false"
+                        ]
+                    },
+                    {
+                        "in": "query",
+                        "name": "contact",
+                        "description": "Determines whether the contact information of the player should be returned. Default `true`.",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "true",
+                            "false"
+                        ]
+                    },
+                    {
+                        "in": "query",
+                        "name": "preferences",
+                        "description": "Determines whether the preferences of the player should be returned. Default `true`.",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "true",
+                            "false"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - Player data found. Returns an array of a single `Players` object.",
+                        "schema": {
+                            "$ref": "#/definitions/players"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - Invalid or no token."
+                    },
+                    "404": {
+                        "description": "Not Found - No data found for specified username."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "players": {
+            "type": "array",
+            "items": {
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "description": "Unique PT username"
+                    },
+                    "guest": {
+                        "$ref": "#/definitions/guest"
+                    },
+                    "address": {
+                        "$ref": "#/definitions/address"
+                    },
+                    "contact": {
+                        "$ref": "#/definitions/contact"
+                    },
+                    "preferences": {
+                        "$ref": "#/definitions/preferences",
+                        "description": "User preferences sorted per category"
+                    }
+                }
+            }
+        },
+        "guest": {
+            "required": [
+                "initials",
+                "surname",
+                "birth_date",
+                "gender"
+            ],
+            "properties": {
+                "initials": {
+                    "type": "string",
+                    "description": "Initials of the player"
+                },
+                "surname_prefix": {
+                    "type": "string",
+                    "description": "Holds the player's preposition e.g. 'van', 'van de'"
+                },
+                "surname": {
+                    "type": "string",
+                    "description": "Surname of the player"
+                },
+                "birth_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Date of birth of the player"
+                },
+                "gender": {
+                    "type": "string",
+                    "description": "Gender of the player"
+                }
+            }
+        },
+        "address": {
+            "properties": {
+                "street": {
+                    "type": "string",
+                    "description": "Street address of the player"
+                },
+                "house_number": {
+                    "type": "string",
+                    "description": "House number of the street player"
+                },
+                "house_number_suffix": {
+                    "type": "string",
+                    "description": "House number suffix of the street player"
+                },
+                "postal_code": {
+                    "type": "string",
+                    "description": "Postal code of the player"
+                },
+                "city": {
+                    "type": "string",
+                    "description": "City of residence of the player"
+                },
+                "country_code": {
+                    "type": "string",
+                    "description": "Specified short code of the country"
+                }
+            }
+        },
+        "contact": {
+            "properties": {
+                "email_address": {
+                    "type": "string",
+                    "description": "Email address of the player"
+                },
+                "telephone_number": {
+                    "type": "string",
+                    "description": "Telephone number of the player"
+                }
+            }
+        },
+        "preferences": {
+            "properties": {
+                "preference": {
+                    "$ref": "#/definitions/preference",
+                    "description": "A list of preference objects. See object definition for more details"
+                }
+            }
+        },
+        "preference": {
+            "type": "array",
+            "items": {
+                "required": [
+                    "category",
+                    "description",
+                    "code"
+                ],
+                "properties": {
+                    "category": {
+                        "type": "string",
+                        "description": "The name of the category e.g. \"Spelen\" (games) and \"Vestigingen\" (locations)"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The preference property value e.g. \"Tafelspelen\" (table games) and \"Amsterdam\", like the value in a key/value pair."
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "The preference property code, like \"key\" in a key/value pair. E.g. \"gam_tasp\" as code for the game category \"Tafelpelen\". The \"code\" property is mandatory when updating the user preferences."
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "token": {
+            "name": "Auth-Token",
+            "type": "apiKey",
+            "in": "header",
+            "description": "User token obtained from PlayTech"
+        }
+    }
+}

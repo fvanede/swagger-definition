@@ -3,12 +3,12 @@
 <head>
     <link rel="stylesheet" href="main.css">
     <meta charset="UTF-8">
-    <title>Retrieve player data of logged in users</title>
+    <title>Retrieve player data of users who logged into the PlayTech (PT) portal</title>
 </head>
 <body>
 <div class="container">
-    <h1>Retrieve player data of logged in users</h1>
-<p><p>The player data web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural     problem within the HC backend server landscape.</p>
+    <h1>Retrieve player data of users who logged into the PlayTech (PT) portal</h1>
+<p><p>The player data web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape.</p>
 </p>
 
 <h2>Summary</h2>
@@ -26,10 +26,10 @@
                         <a href="#path--players--username-">/players/{username}</a>
                     </td>
                 <td>
-                    <a href="#operation--players--username--post">POST</a>
+                    <a href="#operation--players--username--get">GET</a>
                 </td>
                 <td>
-                    <p>Get player data</p>
+                    <p>Get player data of player logged into PT portal</p>
 
                 </td>
             </tr>
@@ -67,14 +67,14 @@
 
     
 <span id="path--players--username-"></span>
-    <div id="operation--players--username--post" class="swagger--panel-operation-post panel">
+    <div id="operation--players--username--get" class="swagger--panel-operation-get panel">
     <div class="panel-heading">
-        <div class="operation-summary">Get player data</div>
-        <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/players/{username}</strong></h3>
+        <div class="operation-summary">Get player data of player logged into PT portal</div>
+        <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/players/{username}</strong></h3>
     </div>
     <div class="panel-body">
         <section class="sw-operation-description">
-            <p>Get data for the player with the given username. Service will check the validity of the combination of username and token. If valid, it will retrieve the user data. Returns an array of a single <code>Players</code> object.</p>
+            <p>Get data for the player with the given PT username. Service will check the validity of the combination of username and token. If valid, it will retrieve the user data. Returns an array of a single <code>Players</code> object.</p>
 
         </section>
         
@@ -93,7 +93,7 @@
                     <td>Auth-Casino-Id
                             <span class="json-property-required"></span>
                         </td>
-                    <td><p>Unique id of the casino the player is logged in to</p>
+                    <td><p>Unique id of the casino the player is logged in to.</p>
 </td>
                     <td>header</td>
                     <td>
@@ -114,6 +114,72 @@
                         <span class="json-property-type">
         string
 </span>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>address
+</td>
+                    <td><p>Determines whether the address information of the player should be returned. Default <code>true</code></p>
+</td>
+                    <td>query</td>
+                    <td>
+                        <span class="json-property-type">
+        string
+</span>
+    <span class="json-property-enum" title="Possible values">&isin; {
+            <span class="json-property-enum-item">true</span>
+            ,
+
+            <span class="json-property-enum-item">false</span>
+            
+
+        }
+        </span>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>contact
+</td>
+                    <td><p>Determines whether the contact information of the player should be returned. Default <code>true</code>.</p>
+</td>
+                    <td>query</td>
+                    <td>
+                        <span class="json-property-type">
+        string
+</span>
+    <span class="json-property-enum" title="Possible values">&isin; {
+            <span class="json-property-enum-item">true</span>
+            ,
+
+            <span class="json-property-enum-item">false</span>
+            
+
+        }
+        </span>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>preferences
+</td>
+                    <td><p>Determines whether the preferences of the player should be returned. Default <code>true</code>.</p>
+</td>
+                    <td>query</td>
+                    <td>
+                        <span class="json-property-type">
+        string
+</span>
+    <span class="json-property-enum" title="Possible values">&isin; {
+            <span class="json-property-enum-item">true</span>
+            ,
+
+            <span class="json-property-enum-item">false</span>
+            
+
+        }
+        </span>
 
                     </td>
                 </tr>
@@ -236,7 +302,400 @@
 
             </dt>
             <dd>
-                <p>Unique username</p>
+                <p>Unique PT username</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">guest:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/guest">guest</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">address:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/address">address</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">contact:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/contact">contact</a>
+</span>
+
+            </dt>
+            <dd>
+                
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">preferences:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/preferences">preferences</a>
+</span>
+
+            </dt>
+            <dd>
+                <p>User preferences sorted per category</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</section>    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/guest"></a>guest:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">initials:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>Initials of the player</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">surname_prefix:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Holds the player&#39;s preposition e.g. &#39;van&#39;, &#39;van de&#39;</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">surname:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>Surname of the player</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">birth_date:</span>
+                <span class="json-property-type">
+        string
+</span>
+    <span class="json-property-format">(date)</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>Date of birth of the player</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">gender:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>Gender of the player</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/address"></a>address:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">street:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Street address of the player</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">house_number:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>House number of the street player</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">house_number_suffix:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>House number suffix of the street player</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">postal_code:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Postal code of the player</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">city:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>City of residence of the player</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">country_code:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Specified short code of the country</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/contact"></a>contact:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">email_address:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Email address of the player</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">telephone_number:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+            </dt>
+            <dd>
+                <p>Telephone number of the player</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/preferences"></a>preferences:
+                    <span class="json-property-type"><span class="json-property-type">
+        object
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">preference:</span>
+                <span class="json-property-type">
+            <a class="json-schema-ref" href="#/definitions/preference">preference</a>
+</span>
+
+            </dt>
+            <dd>
+                <p>A list of preference objects. See object definition for more details</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>    
+    <div class="panel panel-definition">
+        <div class="panel-heading">
+                <h3 class="panel-title"><a name="/definitions/preference"></a>preference:
+                    <span class="json-property-type"><span class="json-property-type">
+        object[]
+</span>
+
+</span>
+                </h3>
+        </div>
+    <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+            <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">category:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>The name of the category e.g. &quot;Spelen&quot; (games) and &quot;Vestigingen&quot; (locations)</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">description:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>The preference property value e.g. &quot;Tafelspelen&quot; (table games) and &quot;Amsterdam&quot;, like the value in a key/value pair.</p>
+
+                <div class="json-inner-schema">
+                    
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">code:</span>
+                <span class="json-property-type">
+        string
+</span>
+
+                    <span class="json-property-required"></span>
+            </dt>
+            <dd>
+                <p>The preference property code, like &quot;key&quot; in a key/value pair. E.g. &quot;gam_tasp&quot; as code for the game category &quot;Tafelpelen&quot;. The &quot;code&quot; property is mandatory when updating the user preferences.</p>
 
                 <div class="json-inner-schema">
                     

@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.4 - 2015-12-01",
+        "version": "0.5 - 2016-01-05",
         "title": "HC Player ranking RESTFul web service.",
         "description": "The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape."
     },
@@ -47,7 +47,7 @@
                 "tags": [
                     "ranking"
                 ],
-                "summary": "Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players.",
+                "summary": "Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players. The following combinations of parameters are allowed - only tournament_code, tournament_code, min_offset and max_offset, tournament_code and player.",
                 "description": "Returns list of ALL available tournaments - also those that were held in the past and which are archived.",
                 "operationId": "GetLeaderboardForTournamentCode",
                 "produces": [
@@ -74,48 +74,12 @@
                         "description": "End offset (exclusive). Example: when the start offset is 0 and the end offset is 15, then the records 0-14 are returned.",
                         "required": false,
                         "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation.",
-                        "schema": {
-                            "$ref": "#/definitions/tournament"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request content"
-                    },
-                    "404": {
-                        "description": "Tournament or ranking not found"
-                    }
-                }
-            }
-        },
-        "/tournaments/{tournament_code}/ranking/{player}": {
-            "get": {
-                "tags": [
-                    "ranking"
-                ],
-                "summary": "Find player ranking in a specific tournament",
-                "description": "Returns list of ALL available tournaments - also those that were held in the past and which are archived.",
-                "operationId": "SearchRanking",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tournament_code",
-                        "description": "Unique integer key for a tournament",
-                        "required": true,
-                        "type": "integer"
                     },
                     {
-                        "in": "path",
+                        "in": "query",
                         "name": "player",
                         "description": "User name of the player",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     }
                 ],
@@ -130,7 +94,7 @@
                         "description": "Bad request content"
                     },
                     "404": {
-                        "description": "Player or tournament not found"
+                        "description": "Tournament or ranking not found"
                     }
                 }
             }

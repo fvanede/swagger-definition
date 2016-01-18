@@ -1,9 +1,17 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.4 - 2015-12-01",
+        "version": "0.5 - 2016-01-18",
         "title": "HC Player ranking RESTFul web service.",
         "description": "The HC Favorites App web service will return responses in the 200 range when the requests can be handled successfully by the backend system. An error in the 400 range will occur if the service or if the backend system detect a functional error. An error in the 500 range will mean that there is an infrastructural problem within the HC backend server landscape."
+    },
+    "securityDefinitions": {
+        "token": {
+            "name": "Auth-Token",
+            "type": "apiKey",
+            "in": "header",
+            "description": "User token obtained from PlayTech"
+        }
     },
     "paths": {
         "/tournaments": {
@@ -30,7 +38,7 @@
                     "200": {
                         "description": "Successful operation.",
                         "schema": {
-                            "$ref": "#/definitions/tournament"
+                            "$ref": "#/definitions/tournaments"
                         }
                     },
                     "400": {
@@ -47,11 +55,16 @@
                 "tags": [
                     "ranking"
                 ],
-                "summary": "Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players.",
-                "description": "Returns list of ALL available tournaments - also those that were held in the past and which are archived.",
+                "summary": "Get leaderboard of players of a specific tournament by tournament code. The default settings are the complete list of players. The position of a specific player in the tournament can be found by specifying the username of the player in the query. Sending token and casino in the header is only necessary when sending a username in the query.",
+                "description": "Returns an array of players with points and position in the specified tournament.",
                 "operationId": "GetLeaderboardForTournamentCode",
                 "produces": [
                     "application/json"
+                ],
+                "security": [
+                    {
+                        "token": []
+                    }
                 ],
                 "parameters": [
                     {
@@ -74,47 +87,18 @@
                         "description": "End offset (exclusive). Example: when the start offset is 0 and the end offset is 15, then the records 0-14 are returned.",
                         "required": false,
                         "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation.",
-                        "schema": {
-                            "$ref": "#/definitions/tournament"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request content"
-                    },
-                    "404": {
-                        "description": "Tournament or ranking not found"
-                    }
-                }
-            }
-        },
-        "/tournaments/{tournament_code}/ranking/{player}": {
-            "get": {
-                "tags": [
-                    "ranking"
-                ],
-                "summary": "Find player ranking in a specific tournament",
-                "description": "Returns list of ALL available tournaments - also those that were held in the past and which are archived.",
-                "operationId": "SearchRanking",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tournament_code",
-                        "description": "Unique integer key for a tournament",
-                        "required": true,
-                        "type": "integer"
                     },
                     {
-                        "in": "path",
+                        "in": "query",
                         "name": "player",
-                        "description": "User name of the player",
+                        "description": "User name of a player",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "Auth-Casino-Id",
+                        "description": "Unique id of the casino the player is logged in to.",
                         "required": true,
                         "type": "string"
                     }
@@ -123,64 +107,70 @@
                     "200": {
                         "description": "Successful operation.",
                         "schema": {
-                            "$ref": "#/definitions/tournament"
+                            "$ref": "#/definitions/tournaments"
                         }
                     },
                     "400": {
                         "description": "Bad request content"
                     },
+                    "403": {
+                        "description": "Forbidden - Token is not valid."
+                    },
                     "404": {
-                        "description": "Player or tournament not found"
+                        "description": "Tournament or ranking not found"
                     }
                 }
             }
         }
     },
     "definitions": {
-        "tournament": {
+        "tournaments": {
             "type": "array",
             "items": {
+                "required": [
+                    "tournament_code"
+                ],
                 "properties": {
                     "tournament_code": {
                         "type": "integer",
-                        "description": "Tournament code",
-                        "required": true
+                        "description": "Tournament code"
                     },
                     "tournament_name": {
                         "type": "string",
-                        "description": "Name of the tournament",
-                        "required": false
+                        "description": "Name of the tournament"
                     },
                     "start_date": {
-                        "type": "date",
-                        "description": "Start date of the tournament",
-                        "required": false
+                        "type": "string",
+                        "format": "date",
+                        "description": "Start date of the tournament"
                     },
                     "end_date": {
-                        "type": "date",
-                        "description": "End date of the tournament",
-                        "required": false
+                        "type": "string",
+                        "format": "date",
+                        "description": "End date of the tournament"
                     },
                     "ranking": {
                         "type": "array",
                         "description": "Ranking of the tournament",
                         "minItems": 0,
                         "items": {
+                            "required": [
+                                "player",
+                                "points",
+                                "position"
+                            ],
                             "properties": {
                                 "player": {
                                     "type": "string",
-                                    "description": "The player's name",
-                                    "required": true
+                                    "description": "The player's name"
                                 },
                                 "points": {
                                     "type": "string",
-                                    "description": "The player's score",
-                                    "required": true
+                                    "description": "The player's score"
                                 },
                                 "position": {
                                     "type": "integer",
-                                    "description": "The player's position in the ranking",
-                                    "required": true
+                                    "description": "The player's position in the ranking"
                                 }
                             }
                         }
